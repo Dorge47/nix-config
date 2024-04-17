@@ -215,7 +215,11 @@
   };
   
   # Enable building from repo file
-  nix.nixPath = [ "nixos-config=/home/chris/Documents/GitHub/nix-config/configuration.nix" ];
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    , "nixos-config=/home/chris/Documents/GitHub/nix-config/configuration.nix"
+    , "/nix/var/nix/profiles/per-user/root/channels"
+  ];
   
   # Garbage collection
   nix.settings.auto-optimise-store = true;
