@@ -115,6 +115,7 @@
   pkgs.telegram-desktop
   pkgs.discord
   pkgs.yt-dlp
+  pkgs.vlc
   pkgs.git
   ];
 
