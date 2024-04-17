@@ -212,4 +212,7 @@
     pinentryFlavor = "gtk2"; # Need something that works on gui and cli
     enableSSHSupport = true;
   };
+  
+  # Enable building from repo file
+  nix.nixPath = [ "nixos-config=/home/chris/Documents/GitHub/nix-config/configuration.nix" ];
 }
