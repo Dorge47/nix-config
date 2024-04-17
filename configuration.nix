@@ -217,8 +217,8 @@
   # Enable building from repo file
   nix.nixPath = [
     "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    , "nixos-config=/home/chris/Documents/GitHub/nix-config/configuration.nix"
-    , "/nix/var/nix/profiles/per-user/root/channels"
+    "nixos-config=/home/chris/Documents/GitHub/nix-config/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
   ];
   
   # Garbage collection
