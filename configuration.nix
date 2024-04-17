@@ -210,6 +210,6 @@
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "gtk2"; # Need something that works on gui and cli
-    enableSSHSuport = true;
+    enableSSHSupport = true;
   };
 }
