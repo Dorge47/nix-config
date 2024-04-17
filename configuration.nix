@@ -107,6 +107,7 @@
   pkgs.fish
   pkgs.htop
   pkgs.vscode
+  pkgs.gnupg
   pkgs.steam
   (pkgs.fortune.override { withOffensive = true; })
   pkgs.etcher # Disable Wi-Fi before running Etcher, its telemetry includes IP addresses
