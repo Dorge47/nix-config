@@ -117,6 +117,7 @@
   pkgs.yt-dlp
   pkgs.vlc
   pkgs.git
+  pkgs.hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
