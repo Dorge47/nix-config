@@ -216,4 +216,10 @@
   
   # Enable building from repo file
   nix.nixPath = [ "nixos-config=/home/chris/Documents/GitHub/nix-config/configuration.nix" ];
+  
+  # Garbage collection
+  nix.settings.auto-optimise-store = true;
+  nix.gc.automatic = true;
+  nix.gc.dates = "weekly";
+  nix.gc.options = "--delete-older-than 30d";
 }
