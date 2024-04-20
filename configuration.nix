@@ -100,7 +100,6 @@ in {
     description = "Christopher Andrade";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
       kate
     #  thunderbird
     ];
@@ -108,7 +107,6 @@ in {
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCg88GUiVCOaDnv2IRdcLDrnpTvpgFRi9Dzyf8l78ikoRX2vEkmT2ucUXvMhFULL9LHw1qDHgGctTCT2cr3VSJ17r/8Fbafq18Y7D6L1n9wgK4khdpkqy7BYHowbPpygroDAVGHIu5wgMaFGOHcanQntcFBqhGAhLYri0XQSO2OHlEgQFmVBS/usBAfcRMmxTzQ9QKFf/NLixymTQcXOO1grIqfBL6Y1vtXihPbU0xrmH6uNnlJqK/xVMqu3w5g09sLUZFoJjB2hQTaLyfAkiU4Co4HSktNzPqCc8a0TBxW32WjCcu6jinvPdPzBrQdR1+N4235lyA1vR27srxkd0gSgl84Dl2DXhfdbRUfg6sjQvvnNlxGHBXLZFmh8qGO8WOlppT9+3KSDYx/LVubRm8M7opyy3Q8h4YsnF/Ffb+86Nm9XLHRiF+DIF4mw/7ixSqveM4jqDSfAye0FyHumoxnHFw7hA9l+XSthNPFInDUZtQw7bRFL2JY3XO6ki5AIf0= chris@Chriss-MacBook-Pro.local"
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHHcaMoJyFhLHOUCTBDFud3H0AlISWNAZzIf3m19V8sPjbJdl66/ohc0dD2tPCLu8cVTVT1Iu3Az7agRE64Ahc0="
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCpagnObeXHry8CouqaIgHCD81wecMMcRdQdPGq+1MiOLJB+QyJc5DJp3OOEX6y+7++mqiWiFEsOB56VnhstWuTCbuXFeMYbq4dBVWH0byWnJecyA7Gk/d6ou2BpaMHH6hV4yQhqEh2+2/AEbBoQdmdPlmrqAaYiUu4rmUOG4jVwZOUp6o1i0vAOhyeFfi1NSW+xzSGpE2j+oqZ9USuhgmCmEA+cB8U5VhEKq+232lL4cHYqiISh636cV5J/A5ioCUMW8sin1radNZyTd4ZX/Ik78g53DChQLdyIVHxKvflBcAazLm2UsH5fTGPCUxojIOrAqS3b9c94F9r1Uxl1lXi2iMtQm7CEOmEXjIV68zHC5mEjxOnbM3YfHH1ad0bDxaKJO6XjIa9n1IBb9YlMTvZR2TmJ+qiWiFe8zre7g0QRKYNiQ14cc13+QckM8tYf3JK1zv2ZPieTNGFDqUd42x3ebpC/4EIsUyDNbSixCU/H5HOu+Yq/pVCWjkzlRYNP9hvWwqnksRqvU4iR9CrCvYnXivZT0+0bOPvM+AryM/cnObgVrv113bJqZ+Zc0WxcaUfL4YQI70D65rG0ohB8wDFy6WkTGoMgWtgec3PxpIWKOGnXnr4scBhqLm2yHJGf8k7QMlKU/IDgAYlBlSmp1OC34XtlFquRbHut3684Lgp0Q== dorge@DESKTOP-KE19M4D"
     ];
   };
 
@@ -122,6 +120,7 @@ in {
   wget
   fish
   htop
+  unstable.firefox-devedition
   unstable.vscode
   gnupg
   steam
