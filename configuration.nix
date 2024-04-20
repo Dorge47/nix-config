@@ -136,6 +136,7 @@ in {
   nodejs
   hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
   pciutils
+  openrgb
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
