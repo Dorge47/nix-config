@@ -3,8 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
-{
+let unstable = import <unstable>
+  {config = { allowUnfree = true; };};
+in {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -116,25 +117,25 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = [
-  pkgs.vim
-  pkgs.wget
-  pkgs.fish
-  pkgs.htop
-  pkgs.vscode
-  pkgs.gnupg
-  pkgs.steam
-  (pkgs.fortune.override { withOffensive = true; })
-  pkgs.etcher # Disable Wi-Fi before running Etcher, its telemetry includes IP addresses
-  pkgs.neofetch
-  pkgs.telegram-desktop
-  pkgs.discord
-  pkgs.yt-dlp
-  pkgs.vlc
-  pkgs.git
-  pkgs.nodejs
-  pkgs.hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
-  pkgs.pciutils
+  environment.systemPackages = with pkgs; [
+  vim
+  wget
+  fish
+  htop
+  vscode
+  gnupg
+  steam
+  (fortune.override { withOffensive = true; })
+  etcher # Disable Wi-Fi before running Etcher, its telemetry includes IP addresses
+  neofetch
+  telegram-desktop
+  discord
+  yt-dlp
+  vlc
+  git
+  nodejs
+  hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
+  pciutils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
