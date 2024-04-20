@@ -136,7 +136,6 @@ in {
   nodejs
   hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
   pciutils
-  openrgb
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -187,7 +186,10 @@ in {
     driSupport = true;
     driSupport32Bit = true;
   };
-
+  
+  #Enable openrgb
+  services.hardware.openrgb.enable = true;
+  
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
