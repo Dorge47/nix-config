@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let unstable = import <unstable>
+let unstable = import <nixpkgs-unstable>
   {config = { allowUnfree = true; };};
 in {
   imports =
@@ -122,7 +122,7 @@ in {
   wget
   fish
   htop
-  vscode
+  unstable.vscode
   gnupg
   steam
   (fortune.override { withOffensive = true; })
