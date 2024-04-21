@@ -135,6 +135,7 @@ in {
   nodejs
   hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
   pciutils
+  obsidian
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -170,6 +171,7 @@ in {
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-19.1.9" # Needed for Etcher
+    "electron-25.9.0"
   ];
 
   #Enable SSH
