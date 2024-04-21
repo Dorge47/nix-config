@@ -125,7 +125,6 @@ in {
   gnupg
   steam
   (fortune.override { withOffensive = true; })
-  etcher # Disable Wi-Fi before running Etcher, its telemetry includes IP addresses
   neofetch
   telegram-desktop
   discord
@@ -171,8 +170,7 @@ in {
   users.defaultUserShell = pkgs.fish;
 
   nixpkgs.config.permittedInsecurePackages = [
-    "electron-19.1.9" # Needed for Etcher
-    "electron-25.9.0"
+    "electron-25.9.0" # Required for obsidian
   ];
 
   #Enable SSH
