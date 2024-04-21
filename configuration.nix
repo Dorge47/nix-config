@@ -120,7 +120,7 @@ in {
   wget
   fish
   htop
-  unstable.firefox-devedition
+  unstable.firefox-devedition-bin
   unstable.vscode
   gnupg
   steam
