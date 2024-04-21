@@ -123,7 +123,6 @@ in {
   unstable.firefox-devedition-bin # Binary is required for some DRM content for some reason
   unstable.vscode
   gnupg
-  steam
   (fortune.override { withOffensive = true; })
   neofetch
   telegram-desktop
@@ -180,6 +179,9 @@ in {
     settings.PasswordAuthentication = false;
     ports = [ 2222 ];
   };
+  
+  # Enable Steam
+  programs.steam.enable = true;
   
   # Enable OpenGL
   hardware.opengl = {
