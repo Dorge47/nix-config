@@ -136,6 +136,7 @@ in {
   pciutils
   obsidian
   twitch-cli
+  steamPackages.steamcmd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
