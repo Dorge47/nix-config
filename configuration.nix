@@ -120,7 +120,7 @@ in {
   wget
   fish
   htop
-  unstable.firefox-devedition-bin
+  unstable.firefox-devedition-bin # Binary is required for some DRM content for some reason
   unstable.vscode
   gnupg
   steam
@@ -136,6 +136,7 @@ in {
   hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
   pciutils
   obsidian
+  twitch-cli
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
