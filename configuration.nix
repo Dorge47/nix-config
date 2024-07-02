@@ -120,7 +120,7 @@ in {
   wget
   fish
   htop
-  unstable.firefox-devedition-bin # Binary is required for some DRM content for some reason
+  firefox-devedition-bin # Binary is required for some DRM content for some reason
   unstable.vscode
   gnupg
   (fortune.override { withOffensive = true; })
