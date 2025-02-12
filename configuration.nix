@@ -17,6 +17,7 @@ in {
 
   # Enable SSH on boot
   boot.kernelParams = [ "ip=dhcp" ];
+  boot.initrd.kernelModules = [ "usbhid" "r8152" "r8169" "mt7925e"];
   boot.initrd.network.enable = true;
   boot.initrd.network.ssh = {
     enable = true;
@@ -29,6 +30,7 @@ in {
       "/etc/secrets/initrd/ssh_host_rsa_key"
     ];
   };
+  boot.kernelPackages = pkgs.linuxPackages_latest; #Need 6.13 kernel for RTL8125D support
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
