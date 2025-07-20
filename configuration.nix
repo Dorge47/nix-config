@@ -82,8 +82,21 @@ in {
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  #services.displayManager.sddm.enable = true;
+  #services.desktopManager.plasma6.enable = true;
+
+  services.greetd.enable = true;
+  programs.hyprland.enable = true;
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+  programs.hyprlock.enable = true;
+  services.hypridle.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-hyprland
+    pkgs.xdg-desktop-portal-gtk
+  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -119,7 +132,16 @@ in {
     description = "Christopher Andrade";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kate
+      kitty
+      waybar
+      mako
+      libnotify
+      swww
+      wl-clipboard
+      slurp
+      grim
+      kdePackages.dolphin
+      rofi-wayland
     #  thunderbird
     ];
     shell = pkgs.fish;
