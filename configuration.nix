@@ -30,7 +30,7 @@ in {
       "/etc/secrets/initrd/ssh_host_rsa_key"
     ];
   };
-  boot.kernelPackages = pkgs.linuxPackages_latest; #Need 6.13 kernel for RTL8125D support
+  boot.kernelPackages = pkgs.linuxPackages_6_13; #Need 6.13 kernel for RTL8125D support
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -83,7 +83,7 @@ in {
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -139,7 +139,7 @@ in {
   wget
   fish
   htop
-  firefox-devedition-bin # Binary is required for some DRM content for some reason
+  unstable.firefox-devedition
   unstable.vscode
   gnupg
   (fortune.override { withOffensive = true; })
