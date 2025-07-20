@@ -157,6 +157,10 @@ in {
   steamcmd
   libsForQt5.filelight
   gimp
+  openvpn
+  p7zip
+  kmymoney
+  chromium
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
