@@ -3,8 +3,8 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let unstable = import <nixpkgs-unstable>
-  {config = { allowUnfree = true; };};
+let unstable = import <nixpkgs-unstable> {config = { allowUnfree = true; };};
+secrets = import ./secrets.nix;
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -42,6 +42,24 @@ in {
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # systemd-resolved
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    domains = [ "~." ]; # "use as default interface for all requests"
+    # (see man resolved.conf)
+    # let Avahi handle mDNS publication
+    extraConfig = ''
+      DNSOverTLS=opportunistic
+      MulticastDNS=resolve
+    '';
+    llmnr = "true";
+  };
+
+  networking.nameservers = [
+    secrets.controlDns # Use the DNS server defined in secrets.nix
+  ];
+  
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
