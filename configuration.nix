@@ -60,6 +60,10 @@ in {
     secrets.controlDns # Use the DNS server defined in secrets.nix
   ];
   
+  networking.firewall.allowedTCPPorts = [
+    25565 # Minecraft
+  ];
+  
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -84,6 +88,43 @@ in {
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+
+  #services.greetd.enable = true;
+  #services.greetd.settings = {
+  #  default_session = {
+  #    user = "greeter";
+  #    command = ''
+  #      ${pkgs.greetd.tuigreet}/bin/tuigreet --user-menu --cmd \
+  #        "${pkgs.bash}/bin/bash -s <<'EOF'
+  #          echo '1) Hyprland'
+  #          echo '2) Plasma'
+  #          read -p 'Choose session: ' choice
+  #          case \"$choice\" in
+  #            1) exec Hyprland ;;
+  #            2) exec ${pkgs.kdePackages.plasma-workspace}/bin/startplasma-wayland ;;
+  #            *) exec Hyprland ;;
+  #          esac
+#EOF"
+  #    '';
+  #  };
+  #};
+  programs.hyprland.enable = true;
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+  programs.hyprlock.enable = true;
+  services.hypridle.enable = true;
+  programs.waybar.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-hyprland
+    pkgs.xdg-desktop-portal-gtk
+  ];
+
+  services.preload = {
+    enable = true;
+    package = pkgs.preload;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -135,34 +176,51 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  vim
-  wget
-  fish
-  htop
-  unstable.firefox-devedition
-  unstable.vscode
-  gnupg
-  (fortune.override { withOffensive = true; })
-  neofetch
-  telegram-desktop
-  discord
-  yt-dlp
-  vlc
-  git
-  nodejs
-  hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
-  pciutils
-  obsidian
-  twitch-cli
-  steamcmd
-  libsForQt5.filelight
-  gimp
-  openvpn
-  p7zip
-  kmymoney
-  chromium
+    vim
+    wget
+    htop
+    unstable.firefox-devedition
+    unstable.vscode
+    gnupg
+    (fortune.override { withOffensive = true; })
+    neofetch
+    telegram-desktop
+    discord
+    yt-dlp
+    vlc
+    git
+    nodejs
+    hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
+    pciutils
+    obsidian
+    twitch-cli
+    steamcmd
+    libsForQt5.filelight
+    gimp
+    openvpn
+    p7zip
+    kmymoney
+    chromium
+    fzf
+    handbrake
+    dbeaver-bin
+    prismlauncher
+    jdk23
+    obs-studio
+    #Hyprland stuff
+    kitty
+    mako
+    libnotify
+    swww
+    wl-clipboard
+    slurp
+    grim
+    rofi-wayland
+    greetd.tuigreet
   ];
-
+  fonts.packages = with pkgs; [
+    nerdfonts
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -234,6 +292,17 @@ in {
     "nixos-config=/home/chris/Documents/GitHub/nix-config/configuration.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
   ];
+  
+  #Mount drives
+  fileSystems."/run/media/chris/New Volume" = #E drive
+    { device = "/dev/disk/by-uuid/01D7DC1481BB6E80";
+      fsType = "ntfs";
+    };
+    
+  fileSystems."/run/media/chris/Basic data partition" = #Windows drive
+    { device = "/dev/disk/by-uuid/01D9D96304239210";
+      fsType = "ntfs";
+    };
   
   # Garbage collection
   nix.settings.auto-optimise-store = true;
