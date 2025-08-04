@@ -30,7 +30,7 @@ in {
       "/etc/secrets/initrd/ssh_host_rsa_key"
     ];
   };
-  boot.kernelPackages = pkgs.linuxPackages_6_13; #Need 6.13 kernel for RTL8125D support
+  boot.kernelPackages = pkgs.linuxPackages_6_16; #Need 6.13+ kernel for RTL8125D support
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -136,7 +136,7 @@ in {
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -160,7 +160,7 @@ in {
     description = "Christopher Andrade";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kate
+      kdePackages.kate
     #  thunderbird
     ];
     shell = pkgs.fish;
@@ -219,8 +219,8 @@ in {
     greetd.tuigreet
   ];
   fonts.packages = with pkgs; [
-    nerdfonts
-  ];
+    
+  ] ++ builtins.filter pkgs.lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
