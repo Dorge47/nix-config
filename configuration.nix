@@ -238,6 +238,7 @@ in {
       wl-clipboard
       slurp
       grim
+      ulauncher
     ];
     services = {
       mako.enable = true;
