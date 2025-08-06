@@ -172,10 +172,10 @@ in {
     ];
   };
 
+  # Home manager
   home-manager.users.chris = {
     home.stateVersion = "23.11";
     programs = {
-      fish.enable = true;
       vim.enable = true;
       htop.enable = true;
       firefox = {
@@ -189,6 +189,12 @@ in {
       yt-dlp.enable = true;
       git = {
         enable = true;
+        userName = "Dorge47";
+        userEmail = "Dorge47@users.noreply.github.com";
+        signing = {
+          signByDefault = true;
+          key = "71107D53545117FE";
+        };
       };
       chromium.enable = true;
       fzf.enable = true;
