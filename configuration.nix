@@ -198,8 +198,6 @@ in {
           confirm_os_window_close = 0;
         };
       };
-      mako.enable = true;
-      swww.enable = true;
       hyprlock = {
         enable = true;
         settings = hyprlockConfig;
@@ -224,7 +222,7 @@ in {
       gimp
       p7zip
       fzf
-      hanfbrake
+      handbrake
       dbeaver-bin
       prismlauncher
       jdk23
@@ -235,6 +233,10 @@ in {
       slurp
       grim
     ];
+    services = {
+      mako.enable = true;
+      swww.enable = true;
+    };
     wayland.windowManager.hyprland = {
       enable = true;
       settings = hyprlandConfig; # See hyprland.nix
