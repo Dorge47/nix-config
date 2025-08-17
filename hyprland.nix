@@ -1,7 +1,7 @@
 {
   "$terminal" = "kitty";
   "$fileManager" = "dolphin"; # Fucked in Hyprland, switch later
-  "$menu" = "rofi -show drun -show-icons";
+  "$menu" = "ulauncher --no-window-shadow";
   
   monitor = [
     "DP-3,1920x1080@144,0x0,1"
@@ -11,7 +11,6 @@
   ];
   
   exec-once = [
-    "waybar"
     "sleep 0.1; swww-daemon"
     "mako"
   ];
@@ -19,6 +18,8 @@
   env = [
     "XCURSOR_SIZE,24"
     "HYPRCURSOR_SIZE,24"
+    "QT_QPA_PLATFORMTHEME,qt6ct"
+    "QT_QPA_PLATFORM,wayland;xcb"
   ];
   
   general = {

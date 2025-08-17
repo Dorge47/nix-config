@@ -34,9 +34,39 @@
         "name": "Home Assistant",
         "keyword": "ha",
         "cmd": "https://ha.tulaus.dev",
-        "icon": "~/Documents/nix-config/ulauncher/icons/homeassistant.ico",
+        "icon": "~/Documents/GitHub/nix-config/ulauncher/icons/homeassistant.ico",
         "is_default_search": false,
         "run_without_argument": true,
         "added": 1754466797.1251404
+    },
+    "5f72b858-d4c8-4555-beda-d70578b0be7b": {
+        "id": "5f72b858-d4c8-4555-beda-d70578b0be7b",
+        "name": "NixOS Package Search",
+        "keyword": "pack",
+        "cmd": "https://search.nixos.org/packages?query=%s",
+        "icon": "~/Documents/GitHub/nix-config/ulauncher/icons/favicon.ico",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1754559319.0268605
+    },
+    "b24dcef1-0878-4896-817b-b80f0728bd26": {
+        "id": "b24dcef1-0878-4896-817b-b80f0728bd26",
+        "name": "NixOS Options Search",
+        "keyword": "opt",
+        "cmd": "https://search.nixos.org/options?query=%s",
+        "icon": "~/Documents/GitHub/nix-config/ulauncher/icons/favicon.ico",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1754559533.2259235
+    },
+    "dce9184b-ba27-49ab-b0ca-cea78d32f5f8": {
+        "id": "dce9184b-ba27-49ab-b0ca-cea78d32f5f8",
+        "name": "Home Manager Options Search",
+        "keyword": "hm",
+        "cmd": "https://home-manager-options.extranix.com/?query=%s",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1754606494.446082
     }
 }

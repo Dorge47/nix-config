@@ -214,6 +214,7 @@ in {
       rofi = {
         enable = true;
         package = pkgs.rofi-wayland;
+        theme = "android_notification";
       };
       yazi.enable = true; # testing before I switch hyprland to this
       btop.enable = true;
