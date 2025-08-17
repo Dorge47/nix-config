@@ -68,6 +68,8 @@ in {
     25565 # Minecraft
   ];
   
+  services.gvfs.enable = true; # smb support
+  
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -213,7 +215,9 @@ in {
         enable = true;
         package = pkgs.rofi-wayland;
       };
-      
+      yazi.enable = true; # testing before I switch hyprland to this
+      btop.enable = true;
+      ncmpcpp.enable = true;
     };
     home.packages = with pkgs; [
       wget
@@ -232,17 +236,28 @@ in {
       dbeaver-bin
       prismlauncher
       jdk23
+      azahar
+      ncdu
       #Hyprland stuff
       libnotify
       swww
       wl-clipboard
       slurp
       grim
+      kdePackages.dolphin
       ulauncher
+      blueman
+      xfce.thunar # temporary while I figure out how the Christ yazi works
+      wev
+      kdePackages.qt6ct
     ];
     services = {
       mako.enable = true;
       swww.enable = true;
+      mpd = {
+        enable = true;
+        musicDirectory = "/home/chris/Music";
+      };
     };
     wayland.windowManager.hyprland = {
       enable = true;
