@@ -20,7 +20,7 @@
     blur_passes = 3;
   };
 
-  input_field = {
+  input-field = {
     size = "200, 50";
     outline_thickness = 3;
     inner_color = "rgba(0, 0, 0, 0.0)"; # no fill
