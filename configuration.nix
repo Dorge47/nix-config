@@ -7,7 +7,10 @@ let unstable = import <nixpkgs-unstable> {config = { allowUnfree = true; };};
 secrets = import ./secrets.nix;
 hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
-home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
+home-manager = builtins.fetchTarball {
+  url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+  sha256 = "026rvynmzmpigax9f8gy9z67lsl6dhzv2p6s8wz4w06v3gjvspm1";
+};
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -232,7 +235,6 @@ in {
       steamcmd
       gimp
       p7zip
-      fzf
       handbrake
       dbeaver-bin
       prismlauncher
