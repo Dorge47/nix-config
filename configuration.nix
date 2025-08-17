@@ -5,10 +5,17 @@
 { config, pkgs, ... }:
 let unstable = import <nixpkgs-unstable> {config = { allowUnfree = true; };};
 secrets = import ./secrets.nix;
+hyprlandConfig = import ./hyprland.nix { inherit secrets; };
+hyprlockConfig = import ./hyprlock.nix;
+home-manager = builtins.fetchTarball {
+  url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+  sha256 = "026rvynmzmpigax9f8gy9z67lsl6dhzv2p6s8wz4w06v3gjvspm1";
+};
 in {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      (import "${home-manager}/nixos")
     ];
 
   # Bootloader.
@@ -64,6 +71,8 @@ in {
     25565 # Minecraft
   ];
   
+  services.gvfs.enable = true; # smb support
+  
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -112,8 +121,6 @@ in {
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };
-  programs.hyprlock.enable = true;
-  services.hypridle.enable = true;
   programs.waybar.enable = true;
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [
@@ -170,53 +177,111 @@ in {
     ];
   };
 
+  # Home manager
+  home-manager.users.chris = {
+    home.stateVersion = "23.11";
+    programs = {
+      vim.enable = true;
+      htop.enable = true;
+      firefox = {
+        enable = true;
+        package = unstable.firefox-devedition;
+      };
+      vscode = {
+        enable = true;
+        package = unstable.vscode;
+      };
+      yt-dlp.enable = true;
+      git = {
+        enable = true;
+        userName = "Dorge47";
+        userEmail = "Dorge47@users.noreply.github.com";
+        signing = {
+          signByDefault = true;
+          key = "71107D53545117FE";
+        };
+      };
+      chromium.enable = true;
+      fzf.enable = true;
+      kitty = {
+        enable = true;
+        settings = {
+          confirm_os_window_close = 0;
+        };
+      };
+      hyprlock = {
+        enable = true;
+        settings = hyprlockConfig;
+      };
+      waybar.enable = true;
+      rofi = {
+        enable = true;
+        package = pkgs.rofi-wayland;
+        theme = "android_notification";
+      };
+      yazi.enable = true; # testing before I switch hyprland to this
+      btop.enable = true;
+      ncmpcpp.enable = true;
+    };
+    home.packages = with pkgs; [
+      wget
+      (fortune.override { withOffensive = true; })
+      neofetch
+      telegram-desktop
+      discord
+      vlc
+      obsidian
+      twitch-cli
+      steamcmd
+      gimp
+      p7zip
+      handbrake
+      dbeaver-bin
+      prismlauncher
+      jdk23
+      azahar
+      ncdu
+      #Hyprland stuff
+      libnotify
+      swww
+      wl-clipboard
+      slurp
+      grim
+      kdePackages.dolphin
+      ulauncher
+      blueman
+      xfce.thunar # temporary while I figure out how the Christ yazi works
+      wev
+      kdePackages.qt6ct
+    ];
+    services = {
+      mako.enable = true;
+      swww.enable = true;
+      mpd = {
+        enable = true;
+        musicDirectory = "/home/chris/Music";
+      };
+    };
+    wayland.windowManager.hyprland = {
+      enable = true;
+      settings = hyprlandConfig; # See hyprland.nix
+    };
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    htop
-    unstable.firefox-devedition
-    unstable.vscode
     gnupg
-    (fortune.override { withOffensive = true; })
-    neofetch
-    telegram-desktop
-    discord
-    yt-dlp
-    vlc
-    git
     nodejs
-    hwinfo # Temporary install to figure out what kernel modules are needed by the wireless keyboard
+    hwinfo
     pciutils
-    obsidian
-    twitch-cli
-    steamcmd
     libsForQt5.filelight
-    gimp
     openvpn
-    p7zip
     kmymoney
-    chromium
-    fzf
-    handbrake
-    dbeaver-bin
-    prismlauncher
-    jdk23
     obs-studio
-    #Hyprland stuff
-    kitty
-    mako
-    libnotify
-    swww
-    wl-clipboard
-    slurp
-    grim
-    rofi-wayland
-    greetd.tuigreet
   ];
   fonts.packages = with pkgs; [
     

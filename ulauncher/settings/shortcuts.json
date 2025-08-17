@@ -1,0 +1,72 @@
+{
+    "3ca9472e-5b1a-45fc-b630-413e20b4c8f4": {
+        "id": "3ca9472e-5b1a-45fc-b630-413e20b4c8f4",
+        "name": "Google Search",
+        "keyword": "g",
+        "cmd": "https://google.com/search?q=%s",
+        "icon": "/nix/store/vagf1nwvwqi1vmcw4xjw0wmyzsjgk180-ulauncher-5.15.7/share/ulauncher/media/google-search-icon.png",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1754466214.5976648
+    },
+    "73915c0b-bce1-4c8d-b331-a1e468866156": {
+        "id": "73915c0b-bce1-4c8d-b331-a1e468866156",
+        "name": "Stack Overflow",
+        "keyword": "so",
+        "cmd": "https://stackoverflow.com/search?q=%s",
+        "icon": "/nix/store/vagf1nwvwqi1vmcw4xjw0wmyzsjgk180-ulauncher-5.15.7/share/ulauncher/media/stackoverflow-icon.svg",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1754466214.5976746
+    },
+    "fa0949c0-ce6e-44f9-be3f-d6e078891e1e": {
+        "id": "fa0949c0-ce6e-44f9-be3f-d6e078891e1e",
+        "name": "Wikipedia",
+        "keyword": "wiki",
+        "cmd": "https://en.wikipedia.org/wiki/%s",
+        "icon": "/nix/store/vagf1nwvwqi1vmcw4xjw0wmyzsjgk180-ulauncher-5.15.7/share/ulauncher/media/wikipedia-icon.png",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1754466214.5976808
+    },
+    "fad7862e-a6fb-4ee8-9846-617757245798": {
+        "id": "fad7862e-a6fb-4ee8-9846-617757245798",
+        "name": "Home Assistant",
+        "keyword": "ha",
+        "cmd": "https://ha.tulaus.dev",
+        "icon": "~/Documents/GitHub/nix-config/ulauncher/icons/homeassistant.ico",
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1754466797.1251404
+    },
+    "5f72b858-d4c8-4555-beda-d70578b0be7b": {
+        "id": "5f72b858-d4c8-4555-beda-d70578b0be7b",
+        "name": "NixOS Package Search",
+        "keyword": "pack",
+        "cmd": "https://search.nixos.org/packages?query=%s",
+        "icon": "~/Documents/GitHub/nix-config/ulauncher/icons/favicon.ico",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1754559319.0268605
+    },
+    "b24dcef1-0878-4896-817b-b80f0728bd26": {
+        "id": "b24dcef1-0878-4896-817b-b80f0728bd26",
+        "name": "NixOS Options Search",
+        "keyword": "opt",
+        "cmd": "https://search.nixos.org/options?query=%s",
+        "icon": "~/Documents/GitHub/nix-config/ulauncher/icons/favicon.ico",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1754559533.2259235
+    },
+    "dce9184b-ba27-49ab-b0ca-cea78d32f5f8": {
+        "id": "dce9184b-ba27-49ab-b0ca-cea78d32f5f8",
+        "name": "Home Manager Options Search",
+        "keyword": "hm",
+        "cmd": "https://home-manager-options.extranix.com/?query=%s",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1754606494.446082
+    }
+}
