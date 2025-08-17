@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 let unstable = import <nixpkgs-unstable> {config = { allowUnfree = true; };};
 secrets = import ./secrets.nix;
-hyprlandConfig = import ./hyprland.nix;
+hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
 home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
 in {

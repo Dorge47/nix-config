@@ -1,3 +1,5 @@
+{ secrets }:
+
 {
   "$terminal" = "kitty";
   "$fileManager" = "dolphin"; # Fucked in Hyprland, switch later
@@ -163,6 +165,8 @@
     "$mainMod, F, FULLSCREEN"
     "$mainMod, L, exec, hyprlock"
     "$mainMod, 6, exec, code"
+    ", XF86Tools, exec, ${secrets.lightsCurl}"
+    ", XF86Launch5, exec, ${secrets.tvCurl}"
   ];
 
   bindm = [
