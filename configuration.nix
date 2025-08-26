@@ -9,7 +9,7 @@ hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
 home-manager = builtins.fetchTarball {
   url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
-  sha256 = "026rvynmzmpigax9f8gy9z67lsl6dhzv2p6s8wz4w06v3gjvspm1";
+  sha256 = "1y919cqrlmq0k44rgnacaq4zq37jj4rdh6f2swp6y2jiz28xb0iq";
 };
 in {
   imports =
@@ -222,6 +222,7 @@ in {
       yazi.enable = true; # testing before I switch hyprland to this
       btop.enable = true;
       ncmpcpp.enable = true;
+      mpvpaper.enable = true;
     };
     home.packages = with pkgs; [
       wget
@@ -241,9 +242,10 @@ in {
       jdk23
       azahar
       ncdu
+      zoom-us
+      kdePackages.kdenlive
       #Hyprland stuff
       libnotify
-      swww
       wl-clipboard
       slurp
       grim
@@ -256,7 +258,6 @@ in {
     ];
     services = {
       mako.enable = true;
-      swww.enable = true;
       mpd = {
         enable = true;
         musicDirectory = "/home/chris/Music";

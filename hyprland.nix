@@ -13,7 +13,6 @@
   ];
   
   exec-once = [
-    "sleep 0.1; swww-daemon"
     "mako"
   ];
   
@@ -162,6 +161,7 @@
     ", Print, exec, grim -g \"$(slurp -w 0)\" - | wl-copy"
     "SHIFT, Print, exec, grim - | wl-copy"
     "$mainMod, 1, exec, firefox-devedition"
+    "$mainMod, 2, exec, firefox-devedition"
     "$mainMod, F, FULLSCREEN"
     "$mainMod, L, exec, hyprlock"
     "$mainMod, 6, exec, code"
