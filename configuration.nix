@@ -9,7 +9,7 @@ hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
 home-manager = builtins.fetchTarball {
   url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
-  sha256 = "02j4a4df9z2zk95d985vcwb5i4vdriyrkx61ah9xwqyqjciw98rb";
+  sha256 = "0q3lv288xlzxczh6lc5lcw0zj9qskvjw3pzsrgvdh8rl8ibyq75s";
 };
 in {
   imports =
@@ -98,25 +98,6 @@ in {
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  #services.greetd.enable = true;
-  #services.greetd.settings = {
-  #  default_session = {
-  #    user = "greeter";
-  #    command = ''
-  #      ${pkgs.greetd.tuigreet}/bin/tuigreet --user-menu --cmd \
-  #        "${pkgs.bash}/bin/bash -s <<'EOF'
-  #          echo '1) Hyprland'
-  #          echo '2) Plasma'
-  #          read -p 'Choose session: ' choice
-  #          case \"$choice\" in
-  #            1) exec Hyprland ;;
-  #            2) exec ${pkgs.kdePackages.plasma-workspace}/bin/startplasma-wayland ;;
-  #            *) exec Hyprland ;;
-  #          esac
-#EOF"
-  #    '';
-  #  };
-  #};
   programs.hyprland.enable = true;
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -222,7 +203,6 @@ in {
       yazi.enable = true; # testing before I switch hyprland to this
       btop.enable = true;
       ncmpcpp.enable = true;
-      mpvpaper.enable = true;
     };
     home.packages = with pkgs; [
       wget
@@ -246,6 +226,7 @@ in {
       kdePackages.kdenlive
       #Hyprland stuff
       libnotify
+      mpvpaper
       wl-clipboard
       slurp
       grim
