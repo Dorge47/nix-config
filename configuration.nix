@@ -146,7 +146,7 @@ in {
   users.users.chris = {
     isNormalUser = true;
     description = "Christopher Andrade";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "wireshark" ];
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
@@ -303,6 +303,7 @@ in {
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0" # Required for obsidian
+    "mbedtls-2.28.10" # Required for OpenRGB
   ];
 
   #Enable SSH
@@ -327,6 +328,14 @@ in {
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+  
+  # Wireshark
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true;
+    usbmon.enable = true;
+    package = pkgs.wireshark;
+  };
   
   # The fuck?
   programs.thefuck.enable = true;
