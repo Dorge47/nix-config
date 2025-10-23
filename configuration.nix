@@ -37,7 +37,7 @@ in {
       "/etc/secrets/initrd/ssh_host_rsa_key"
     ];
   };
-  boot.kernelPackages = pkgs.linuxPackages_6_16; #Need 6.13+ kernel for RTL8125D support
+  boot.kernelPackages = pkgs.linuxPackages_6_17; #Need 6.13+ kernel for RTL8125D support
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -224,6 +224,7 @@ in {
       ncdu
       zoom-us
       kdePackages.kdenlive
+      pavucontrol
       #Hyprland stuff
       libnotify
       mpvpaper
@@ -241,7 +242,7 @@ in {
       mako.enable = true;
       mpd = {
         enable = true;
-        musicDirectory = "/home/chris/Music";
+        musicDirectory = secrets.music;
       };
     };
     wayland.windowManager.hyprland = {
@@ -264,6 +265,7 @@ in {
     openvpn
     kmymoney
     obs-studio
+    cifs-utils
   ];
   fonts.packages = with pkgs; [
     
@@ -326,6 +328,9 @@ in {
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   
+  # The fuck?
+  programs.thefuck.enable = true;
+  
   # GnuPG
   programs.gnupg.agent = {
     enable = true;
@@ -351,6 +356,12 @@ in {
       fsType = "ntfs";
     };
   
+  fileSystems."/run/media/chris/fileserver" = #Unraid server
+    { device = secrets.unraid.path;
+      fsType = "cifs";
+      options = secrets.unraid.options;
+    };
+
   # Garbage collection
   nix.settings.auto-optimise-store = true;
   nix.gc.automatic = true;
