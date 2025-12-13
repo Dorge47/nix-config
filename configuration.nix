@@ -8,8 +8,8 @@ secrets = import ./secrets.nix;
 hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
 home-manager = builtins.fetchTarball {
-  url = "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
-  sha256 = "07pk5m6mxi666dclaxdwf7xrinifv01vvgxn49bjr8rsbh31syaq";
+  url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
+  sha256 = "06irakwl3l32sqp3j0334g849bxvbbscqqbrzgp9xmfnka86vq8n";
 };
 in {
   imports =
@@ -109,11 +109,6 @@ in {
     pkgs.xdg-desktop-portal-gtk
   ];
 
-  services.preload = {
-    enable = true;
-    package = pkgs.preload;
-  };
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -175,8 +170,10 @@ in {
       yt-dlp.enable = true;
       git = {
         enable = true;
-        userName = "Dorge47";
-        userEmail = "Dorge47@users.noreply.github.com";
+        settings.user = {
+          name = "Dorge47";
+          email = "Dorge47@users.noreply.github.com";
+        };
         signing = {
           signByDefault = true;
           key = "71107D53545117FE";
@@ -197,7 +194,6 @@ in {
       waybar.enable = true;
       rofi = {
         enable = true;
-        package = pkgs.rofi-wayland;
         theme = "android_notification";
       };
       yazi.enable = true; # testing before I switch hyprland to this
@@ -219,7 +215,7 @@ in {
       handbrake
       dbeaver-bin
       prismlauncher
-      jdk23
+      jdk
       azahar
       ncdu
       zoom-us
@@ -261,7 +257,7 @@ in {
     nodejs
     hwinfo
     pciutils
-    libsForQt5.filelight
+    kdePackages.filelight
     openvpn
     kmymoney
     obs-studio
@@ -336,9 +332,6 @@ in {
     usbmon.enable = true;
     package = pkgs.wireshark;
   };
-  
-  # The fuck?
-  programs.thefuck.enable = true;
   
   # GnuPG
   programs.gnupg.agent = {
