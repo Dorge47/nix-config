@@ -9,7 +9,7 @@ hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
 home-manager = builtins.fetchTarball {
   url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
-  sha256 = "06irakwl3l32sqp3j0334g849bxvbbscqqbrzgp9xmfnka86vq8n";
+  sha256 = "00hzbqdayq8zjrw5rfzb0909nw2b1gmy6czv2c1hfjj63z94xpic";
 };
 in {
   imports =
