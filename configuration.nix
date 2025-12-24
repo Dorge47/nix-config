@@ -37,7 +37,7 @@ in {
       "/etc/secrets/initrd/ssh_host_rsa_key"
     ];
   };
-  boot.kernelPackages = pkgs.linuxPackages_6_17; #Need 6.13+ kernel for RTL8125D support
+  boot.kernelPackages = pkgs.linuxPackages_6_18; #Need 6.13+ kernel for RTL8125D support
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -209,6 +209,7 @@ in {
       vlc
       obsidian
       twitch-cli
+      steamcmd
       gimp
       p7zip
       handbrake
