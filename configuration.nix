@@ -73,6 +73,8 @@ in {
   
   services.gvfs.enable = true; # smb support
   
+  services.gnome.gnome-keyring.enable = true;
+  
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -211,7 +213,6 @@ in {
       twitch-cli
       steamcmd
       gimp
-      p7zip
       handbrake
       dbeaver-bin
       prismlauncher
@@ -221,6 +222,10 @@ in {
       zoom-us
       kdePackages.kdenlive
       pavucontrol
+      vdhcoapp
+      lutris
+      unstable.p7zip-rar
+      python315
       #Hyprland stuff
       libnotify
       mpvpaper
@@ -262,6 +267,7 @@ in {
     kmymoney
     obs-studio
     cifs-utils
+    protonup-qt
   ];
   fonts.packages = with pkgs; [
     
