@@ -6,9 +6,11 @@
   "$menu" = "ulauncher --no-window-shadow";
   
   monitor = [
-    "DP-3,1920x1080@144,0x0,1"
-    "DP-1,1920x1080@144,1920x0,1"
-    "DP-4,1920x1080@60,-1920x0,1"
+    "DP-3,1920x1080@144,0x1080,1"
+    "DP-1,1920x1080@144,1920x1080,1"
+    "DP-2,1920x1080@144,2720x0,1"
+    "DP-4,1920x1080@60,-1920x1080,1" # TV thru hub
+    "HDMI-A-1,1920x1080@60,-1920x1080,1" # TV thru graphics card
     ",preferred,auto,1"
   ];
   
@@ -84,6 +86,7 @@
   workspace = [
     "1, monitor:DP-3"
     "2, monitor:DP-1"
+    "3, monitor:DP-2"
   ];
   
   dwindle = {
@@ -96,7 +99,7 @@
   };
   
   misc = {
-    force_default_wallpaper = -1;
+    force_default_wallpaper = 3;
     disable_hyprland_logo = false;
   };
   
@@ -163,6 +166,7 @@
     "$mainMod, 6, exec, code"
     ", XF86Tools, exec, ${secrets.lightsCurl}"
     ", XF86Launch5, exec, ${secrets.tvCurl}"
+    "$mainMod, A, exec, pavucontrol"
   ];
 
   bindm = [

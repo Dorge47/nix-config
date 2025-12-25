@@ -199,7 +199,10 @@ in {
         theme = "android_notification";
       };
       yazi.enable = true; # testing before I switch hyprland to this
-      btop.enable = true;
+      btop = {
+        enable = true;
+        package = pkgs.btop-rocm;
+      };
       ncmpcpp.enable = true;
     };
     home.packages = with pkgs; [
