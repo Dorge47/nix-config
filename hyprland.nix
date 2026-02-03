@@ -4,56 +4,58 @@
   "$terminal" = "kitty";
   "$fileManager" = "dolphin"; # Fucked in Hyprland, switch later
   "$menu" = "ulauncher --no-window-shadow";
-  
+
   monitor = [
     "DP-3,1920x1080@144,0x1080,1" # Left
     "DP-1,1920x1080@144,1920x1080,1" # Main
     "DP-2,1920x1080@144,2720x0,1" # Top
     "DP-4,1920x1080@60,-1920x1080,1" # TV thru hub
-    "HDMI-A-1,1920x1080@60,-1920x1080,1" # TV thru graphics card
+    "HDMI-A-1,1280x720@60,-1920x1080,1" # TV thru graphics card
     ",preferred,auto,1"
   ];
-  
+
   exec-once = [
     "mako"
+    "mpvpaper -v -o 'loop' DP-1 ~/Pictures/asadal_stock_78.jpg" # Frutiger archive :D
+    "mpvpaper -v -o 'loop' DP-3 ~/Pictures/asadal_stock_61.jpg"
+    "mpvpaper -v -o 'loop' DP-2 ~/Pictures/materialdictionary206_36.jpg"
   ];
-  
+
   env = [
     "XCURSOR_SIZE,24"
     "HYPRCURSOR_SIZE,24"
     "QT_QPA_PLATFORMTHEME,qt6ct"
     "QT_QPA_PLATFORM,wayland;xcb"
   ];
-  
+
   general = {
     gaps_in = 5;
     gaps_out = 20;
-    border_size = 2;
-    "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-    "col.inactive_border" = "rgba(595959aa)";
+    border_size = 0;
     resize_on_border = false;
     allow_tearing = false;
     layout = "dwindle";
   };
-  
+
   decoration = {
-    rounding = 10;
+    rounding = 8;
     active_opacity = 1.0;
-    inactive_opacity = 1.0;
-    shadow = {
-      enabled = true;
-      range = 4;
-      render_power = 3;
-      color = "rgba(1a1a1aee)";
-    };
+    inactive_opacity = 0.5;
+    dim_inactive = true;
+    dim_strength = 0.12;
     blur = {
       enabled = true;
-      size = 3;
-      passes = 1;
-      vibrancy = 0.1696;
+      size = 2;
+      passes = 2;
+      new_optimizations = true;
+      ignore_opacity = true;
+      xray = false;
+      noise = 0.02;
+      contrast = 1.0;
+      brightness = 1.0;
     };
   };
-  
+
   animations = {
     enabled = true;
     bezier = [
@@ -82,27 +84,22 @@
       "workspacesOut, 1, 1.94, almostLinear, fade"
     ];
   };
-  
+
   workspace = [
     "1, monitor:DP-3"
     "2, monitor:DP-1"
     "3, monitor:DP-2"
   ];
-  
+
   dwindle = {
     pseudotile = true;
     preserve_split = true;
   };
-  
+
   master = {
     new_status = "master";
   };
-  
-  misc = {
-    force_default_wallpaper = 3;
-    disable_hyprland_logo = false;
-  };
-  
+
   input = {
     kb_layout = "us";
     kb_model = "pc104";
@@ -116,9 +113,9 @@
       natural_scroll = false;
     };
   };
-  
+
   "$mainMod" = "SUPER";
-  
+
   bind = [
     "$mainMod, Q, exec, $terminal"
     "CTRL ALT, T, exec, $terminal"
@@ -189,9 +186,18 @@
     ", XF86AudioPlay, exec, playerctl play-pause"
     ", XF86AudioPrev, exec, playerctl previous"
   ];
-  
+
   windowrulev2 = [
     "suppressevent maximize, class:.*"
     "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+    "opacity 0.8 0.5, class:(kitty)"
+    "opaque, class:^(firefox-devedition|code)$"
+    "forcergbx, class:^(firefox-devedition|code)$"
+    "noblur, class:^(firefox-devedition|code)$"
+  ];
+
+  layerrule = [
+    "xray 1, waybar"
+    "ignorealpha 0.2, waybar"
   ];
 }

@@ -7,6 +7,7 @@ let unstable = import <nixpkgs-unstable> {config = { allowUnfree = true; };};
 secrets = import ./secrets.nix;
 hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
+waybarConfig = builtins.fromJSON (builtins.readFile ./waybar.json);
 home-manager = builtins.fetchTarball {
   url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
   sha256 = "1rj0cazl5kjcfn4433fj31293yx421wbawryp5q3bq3fsmhkkr9h";
@@ -188,12 +189,17 @@ in {
         settings = {
           confirm_os_window_close = 0;
         };
+        themeFile = "Box";
       };
       hyprlock = {
         enable = true;
         settings = hyprlockConfig;
       };
-      waybar.enable = true;
+      waybar = {
+        enable = true;
+        settings = waybarConfig;
+        style = ./waybar.css;
+      };
       rofi = {
         enable = true;
         theme = "android_notification";
