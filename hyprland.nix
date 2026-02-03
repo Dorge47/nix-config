@@ -6,9 +6,9 @@
   "$menu" = "ulauncher --no-window-shadow";
   
   monitor = [
-    "DP-3,1920x1080@144,0x1080,1"
-    "DP-1,1920x1080@144,1920x1080,1"
-    "DP-2,1920x1080@144,2720x0,1"
+    "DP-3,1920x1080@144,0x1080,1" # Left
+    "DP-1,1920x1080@144,1920x1080,1" # Main
+    "DP-2,1920x1080@144,2720x0,1" # Top
     "DP-4,1920x1080@60,-1920x1080,1" # TV thru hub
     "HDMI-A-1,1920x1080@60,-1920x1080,1" # TV thru graphics card
     ",preferred,auto,1"
