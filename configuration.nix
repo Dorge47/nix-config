@@ -271,7 +271,17 @@ in {
     obs-studio
     cifs-utils
     protonup-qt
+    libinput
   ];
+  
+  # Fix stupid high-resolution scrolling on G502
+  environment.etc = {
+    "libinput/local-overrides.quirks".text = ''
+[Logitech G502]
+MatchName=Logitech G502
+AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
+  };
+  
   fonts.packages = with pkgs; [
     
   ] ++ builtins.filter pkgs.lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
