@@ -100,6 +100,7 @@ in {
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # Hyprland stuff 
   programs.hyprland.enable = true;
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -110,6 +111,10 @@ in {
     pkgs.xdg-desktop-portal-hyprland
     pkgs.xdg-desktop-portal-gtk
   ];
+
+  systemd.user.services.waybar.unitConfig = {
+    ConditionEnvironment = "XDG_CURRENT_DESKTOP=Hyprland"; # Don't start waybar on Plasma >:(
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
