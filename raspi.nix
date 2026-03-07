@@ -5,6 +5,7 @@
 { config, lib, pkgs, ... }:
 let unfree = import <nixos> {config = { allowUnfree = true; };};
 secrets = import ./secrets.nix;
+# nginxConfig = import ./raspi/nginx.nix
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -114,6 +115,7 @@ in {
     libraspberrypi
     raspberrypi-eeprom
     cifs-utils
+    btop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
