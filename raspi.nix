@@ -5,7 +5,7 @@
 { config, lib, pkgs, ... }:
 let unfree = import <nixos> {config = { allowUnfree = true; };};
 secrets = import ./secrets.nix;
-nginxConfig = import ./raspi/nginx.nix;
+#nginxConfig = import ./raspi/nginx.nix; # Fix later
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -144,9 +144,105 @@ in {
       extraDomainNames = secrets.domainNames;
       dnsProvider = "cloudflare";
       environmentFile = "acme-cloudflare.env";
-    }
+    };
   };
-  services.nginx = nginxConfig;
+  services.nginx = {
+    enable = true;
+    virtualHosts = {
+      "tulaus.dev" = {
+        forceSSL = true;
+        useACMEHost = "tulaus.dev";
+        # All serverAliases will be added as extra domain names on the certificate.
+        serverAliases = [ "tulaus.dev" "www.tulaus.dev" "tulaus.com" "www.tulaus.com" "tulaus.org" "www.tulaus.org" "velvetbot.net" "www.velvetbot.net" "fantomethief.net" "www.fantomethief.net" "cartwebapp.net" "www.cartwebapp.net" "mc.cartwebapp.net" ];
+        locations = {
+          "/" = {
+            root = "/home/dorge/Documents/GitHub/Website";
+          };
+          "~ \\.php$" = {
+            extraConfig = ''
+              fastcgi_pass unix:${config.services.phpfpm.pools.mywebsite.socket};
+              fastcgi_index index.php;
+              include ${pkgs.nginx}/conf/fastcgi.conf;
+            '';
+          };
+          "/remotefiles/" = {
+            extraConfig = ''
+              allow all;
+              autoindex on;
+            '';
+          };
+          "~ /\\.(?!well-known).*" = {
+            extraConfig = ''
+              deny all;
+            '';
+          };
+          "~* \\.(git|env|json|lock|log|md|ini|bak|swp|yml|yaml)$" = {
+            extraConfig = ''
+              deny all;
+            '';
+          };
+          "= /403.html" = {
+            root = "/home/dorge/Documents/GitHub/Website";
+            extraConfig = ''
+              internal;
+            '';
+          };
+          "= /Chris_Andrade_0xAE9A1BE8_public.asc" = {
+            return = "403";
+          };
+          "~* \\.(jpg|jpeg|png|gif|ico|css|js|svg|woff2?|ttf|eot|otf)$" = {
+            extraConfig = ''
+              access_log off;
+              expires 30d;
+            '';
+          };
+          "~* \\.(?!php|html|css|js|jpg|jpeg|png|gif|ico|svg)$" = {
+            extraConfig = ''
+              deny all;
+            '';
+          };
+        };
+        extraConfig = ''
+          error_page 403 /403.html;
+        '';
+      };
+
+      # We can also add a different vhost and reuse the same certificate
+      # but we have to append extraDomainNames manually beforehand:
+      # security.acme.certs."foo.example.com".extraDomainNames = [ "baz.example.com" ];
+      "ha.tulaus.dev" = {
+        forceSSL = true;
+        useACMEHost = "tulaus.dev";
+        locations."/" = {
+          extraConfig = ''
+          proxy_pass http://192.168.1.48:8123;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          '';
+        };
+      };
+      
+      "plex.tulaus.dev" = {
+        forceSSL = true;
+        useACMEHost = "tulaus.dev";
+        locations."/" = {
+          extraConfig = ''
+            proxy_pass http://192.168.1.214:32400;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+          '';
+        };
+      };
+    };
+  };
   services.phpfpm.pools.www = {
     user = "nginx";
     settings = {
@@ -175,8 +271,14 @@ in {
   ];
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
+  networking.firewall.allowedUDPPorts = [
+    80
+    443
+  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
