@@ -143,7 +143,8 @@ in {
       domain = "tulaus.dev";
       extraDomainNames = secrets.domainNames;
       dnsProvider = "cloudflare";
-      environmentFile = "acme-cloudflare.env";
+      environmentFile = "/home/dorge/Documents/GitHub/nix-config/acme-cloudflare.env";
+      group = "nginx";
     };
   };
   services.nginx = {
@@ -154,9 +155,10 @@ in {
         useACMEHost = "tulaus.dev";
         # All serverAliases will be added as extra domain names on the certificate.
         serverAliases = [ "tulaus.dev" "www.tulaus.dev" "tulaus.com" "www.tulaus.com" "tulaus.org" "www.tulaus.org" "velvetbot.net" "www.velvetbot.net" "fantomethief.net" "www.fantomethief.net" "cartwebapp.net" "www.cartwebapp.net" "mc.cartwebapp.net" ];
+        root = "/var/www/Website";
         locations = {
           "/" = {
-            root = "/home/dorge/Documents/GitHub/Website";
+            index = "index.php index.html";
           };
           "~ \\.php$" = {
             extraConfig = ''
@@ -182,7 +184,7 @@ in {
             '';
           };
           "= /403.html" = {
-            root = "/home/dorge/Documents/GitHub/Website";
+            root = "/var/www/Website";
             extraConfig = ''
               internal;
             '';
@@ -249,6 +251,11 @@ in {
       "listen.owner" = "nginx";
       "listen.group" = "nginx";
       "listen.mode" = "0660";
+      "pm" = "dynamic";
+      "pm.max_children" = 32;
+      "pm.start_servers" = 2;
+      "pm.min_spare_servers" = 2;
+      "pm.max_spare_servers" = 4;
     };
   };
 
