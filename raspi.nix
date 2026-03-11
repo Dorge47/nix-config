@@ -5,7 +5,7 @@
 { config, lib, pkgs, ... }:
 let unfree = import <nixos> {config = { allowUnfree = true; };};
 secrets = import ./secrets.nix;
-# nginxConfig = import ./raspi/nginx.nix
+nginxConfig = import ./raspi/nginx.nix;
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -135,8 +135,25 @@ in {
     settings.PasswordAuthentication = false;
   };
 
-  services.nginx = {
-    enable = true;
+  # webserver
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "admin@tulaus.org";
+    certs."tulaus.dev" = {
+      domain = "tulaus.dev";
+      extraDomainNames = secrets.domainNames;
+      dnsProvider = "cloudflare";
+      environmentFile = "acme-cloudflare.env";
+    }
+  };
+  services.nginx = nginxConfig;
+  services.phpfpm.pools.www = {
+    user = "nginx";
+    settings = {
+      "listen.owner" = "nginx";
+      "listen.group" = "nginx";
+      "listen.mode" = "0660";
+    };
   };
 
   # systemd-resolved
