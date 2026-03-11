@@ -160,7 +160,7 @@ in {
           };
           "~ \\.php$" = {
             extraConfig = ''
-              fastcgi_pass unix:${config.services.phpfpm.pools.mywebsite.socket};
+              fastcgi_pass unix:/run/phpfpm/www.sock;
               fastcgi_index index.php;
               include ${pkgs.nginx}/conf/fastcgi.conf;
             '';
