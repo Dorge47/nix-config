@@ -23,7 +23,12 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable SSH on boot
-  boot.kernelParams = [ "ip=dhcp" ];
+  boot.kernelParams = [
+    "ip=dhcp"
+    #"default_hugepagesz=1G"
+    #"hugepagesz=1G"
+    #"hugepages=8"
+  ];
   boot.initrd.kernelModules = [ "usbhid" "r8152" "r8169" "mt7925e"];
   boot.initrd.network.enable = true;
   boot.initrd.network.ssh = {
@@ -234,6 +239,7 @@ in {
       lutris
       unstable.p7zip-rar
       python315
+      (factorio-space-age.override { username = "dorge47"; token = secrets.factorioToken; })
       #Hyprland stuff
       libnotify
       mpvpaper
@@ -277,6 +283,7 @@ in {
     cifs-utils
     protonup-qt
     libinput
+    mimalloc
   ];
   
   # Fix stupid high-resolution scrolling on G502
