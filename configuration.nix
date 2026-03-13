@@ -313,7 +313,8 @@ AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
   };
   
   fonts.packages = with pkgs; [
-    
+    noto-fonts-cjk-serif
+    noto-fonts-cjk-sans
   ] ++ builtins.filter pkgs.lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
