@@ -16,6 +16,9 @@
   
   exec-once = [
     "mako"
+    "mpvpaper -v -o 'loop' DP-1 ~/Pictures/wallhaven-p8j29p.jpg"
+    "mpvpaper -v -o 'loop' DP-2 ~/Pictures/wallhaven-4gj2q4.jpg"
+    "mpvpaper -v -o 'loop' DP-3 ~/Pictures/wallhaven-o3km89.png"
   ];
   
   env = [
@@ -26,10 +29,10 @@
   ];
   
   general = {
-    gaps_in = 5;
-    gaps_out = 20;
-    border_size = 2;
-    "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+    gaps_in = 2;
+    gaps_out = "2, 3, 3, 3";
+    border_size = 1;
+    "col.active_border" = "rgba(4e71b9ee) rgba(7ebae4ee) 45deg";
     "col.inactive_border" = "rgba(595959aa)";
     resize_on_border = false;
     allow_tearing = false;
@@ -37,7 +40,7 @@
   };
   
   decoration = {
-    rounding = 10;
+    rounding = 5;
     active_opacity = 1.0;
     inactive_opacity = 1.0;
     shadow = {
