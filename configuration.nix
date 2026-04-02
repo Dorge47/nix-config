@@ -47,7 +47,13 @@ in {
     #"hugepagesz=1G"
     #"hugepages=8"
   ];
-  boot.initrd.kernelModules = [ "usbhid" "r8152" "r8169" "mt7925e"];
+  boot.initrd.kernelModules = [
+    "usbhid"
+    "r8152"
+    "r8169"
+    "mt7925e"
+    "nct6775" # Case fans
+    ];
   boot.initrd.network.enable = true;
   boot.initrd.network.ssh = {
     enable = true;
@@ -303,6 +309,11 @@ in {
     protonup-qt
     libinput
     mimalloc
+    coolercontrol.coolercontrol-gui
+    coolercontrol.coolercontrold
+    coolercontrol.coolercontrol-ui-data
+    lm_sensors
+    gparted
   ];
   
   # Fix stupid high-resolution scrolling on G502
