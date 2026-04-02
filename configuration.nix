@@ -13,7 +13,7 @@ hyprlockConfig = import ./hyprlock.nix;
 in {
   imports =
     [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
+      ./hardware-configuration.nix
     ];
 
   # Bootloader.
@@ -434,6 +434,9 @@ AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
       fsType = "cifs";
       options = secrets.unraid.options;
     };
+
+  # flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Garbage collection
   nix.settings.auto-optimise-store = true;
