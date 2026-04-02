@@ -312,6 +312,7 @@ in {
     coolercontrol.coolercontrol-ui-data
     lm_sensors
     gparted
+    git-crypt
   ];
   
   environment.etc = {
