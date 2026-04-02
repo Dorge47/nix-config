@@ -2,20 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-let unstable = import <nixpkgs-unstable> {config = { allowUnfree = true; };};
+{ config, pkgs, inputs, ... }:
+let unstable = import inputs.nixpkgs-unstable {
+  system = pkgs.system;
+  config = { allowUnfree = true; };
+};
 secrets = import ./secrets.nix;
 hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
-home-manager = builtins.fetchTarball {
-  url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
-  sha256 = "08ls04dhzda3wcmd5250kvany5wc2mcqhcshb9fsymbgcr72bxjq";
-};
 in {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
-      (import "${home-manager}/nixos")
     ];
 
   # Bootloader.
