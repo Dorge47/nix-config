@@ -7,6 +7,9 @@ let unstable = import inputs.nixpkgs-unstable {
   system = pkgs.system;
   config = { allowUnfree = true; };
 };
+nixfixPkgs = import inputs.nixpkgs-nixfix {
+  system = pkgs.system;
+};
 secrets = import ./secrets.nix;
 hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
@@ -438,6 +441,9 @@ AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
 
   # flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+  # Emergency update
+  nix.package = nixfixPkgs.nixVersions.latest;
 
   # Garbage collection
   nix.settings.auto-optimise-store = true;
