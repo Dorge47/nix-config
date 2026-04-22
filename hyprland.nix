@@ -18,7 +18,7 @@
     "mako"
     "mpvpaper -v -o 'loop' DP-1 ~/Pictures/wallhaven-p8j29p.jpg"
     "mpvpaper -v -o 'loop' DP-2 ~/Pictures/wallhaven-4gj2q4.jpg"
-    "mpvpaper -v -o 'loop' DP-3 ~/Pictures/wallhaven-o3km89.png"
+    "mpvpaper -v -o 'loop' DP-3 ~/Pictures/wallhaven-4dpel4.jpg"
   ];
   
   env = [
@@ -197,4 +197,9 @@
     "suppressevent maximize, class:.*"
     "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
   ];
+  
+  device = {
+    name = "sony-interactive-entertainment-dualsense-wireless-controller-touchpad";
+    enabled = false;
+  };
 }
