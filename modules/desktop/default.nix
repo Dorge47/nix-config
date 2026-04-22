@@ -1,5 +1,8 @@
-{ pkgs, secrets, ... }:
-{
+{ pkgs, inputs, ... }:
+let nixfixPkgs = import inputs.nixpkgs-nixfix {
+  system = pkgs.system;
+};
+in {
   imports = [
     ./plasma.nix
     ./hyprland.nix

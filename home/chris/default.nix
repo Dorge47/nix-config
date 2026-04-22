@@ -1,5 +1,9 @@
 { pkgs, inputs, secrets, ... }:
-{
+let unstable = import inputs.nixpkgs-unstable {
+  system = pkgs.system;
+  config = { allowUnfree = true; };
+};
+in {
   imports = [
     ./hyprland/default.nix
     ./hyprland/settings.nix
