@@ -14,95 +14,6 @@ secrets = import ./secrets.nix;
 hyprlandConfig = import ./hyprland.nix { inherit secrets; };
 hyprlockConfig = import ./hyprlock.nix;
 in {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
-  # Bootloader.
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    useOSProber = true;
-    device = "nodev";
-    theme = pkgs.stdenv.mkDerivation {
-      pname = "minegrub-theme";
-      version = "master";
-      src = pkgs.fetchFromGitHub {
-        owner = "Dorge47";
-        repo = "minegrub-theme";
-        rev = "master";
-        hash = "sha256-ZlKa/DLAvQ8z20Xi5qHJjuNq64EJEoYDqgjwpWUz5LA=";
-      };
-      installPhase = ''
-      mkdir -p $out
-      cp -r minegrub/* $out/'';
-    };
-  };
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Enable SSH on boot
-  boot.kernelParams = [
-    "ip=dhcp"
-    #"default_hugepagesz=1G"
-    #"hugepagesz=1G"
-    #"hugepages=8"
-  ];
-  boot.initrd.kernelModules = [
-    "usbhid"
-    "r8152"
-    "r8169"
-    "mt7925e"
-    "nct6775" # Case fans
-    ];
-  boot.initrd.network.enable = true;
-  boot.initrd.network.ssh = {
-    enable = true;
-    port = 2222;
-    authorizedKeys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCg88GUiVCOaDnv2IRdcLDrnpTvpgFRi9Dzyf8l78ikoRX2vEkmT2ucUXvMhFULL9LHw1qDHgGctTCT2cr3VSJ17r/8Fbafq18Y7D6L1n9wgK4khdpkqy7BYHowbPpygroDAVGHIu5wgMaFGOHcanQntcFBqhGAhLYri0XQSO2OHlEgQFmVBS/usBAfcRMmxTzQ9QKFf/NLixymTQcXOO1grIqfBL6Y1vtXihPbU0xrmH6uNnlJqK/xVMqu3w5g09sLUZFoJjB2hQTaLyfAkiU4Co4HSktNzPqCc8a0TBxW32WjCcu6jinvPdPzBrQdR1+N4235lyA1vR27srxkd0gSgl84Dl2DXhfdbRUfg6sjQvvnNlxGHBXLZFmh8qGO8WOlppT9+3KSDYx/LVubRm8M7opyy3Q8h4YsnF/Ffb+86Nm9XLHRiF+DIF4mw/7ixSqveM4jqDSfAye0FyHumoxnHFw7hA9l+XSthNPFInDUZtQw7bRFL2JY3XO6ki5AIf0= chris@Chriss-MacBook-Pro.local"
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJd9CCADuU72Eqt2ZmOOzWbwutaJjpy9VIJ+CVI3Jtz9d41UIqXPJwEYHueEFbup8tkB7mSAmRxgFh3mr5xOwH8="
-    ];
-    hostKeys = [
-      "/etc/secrets/initrd/ssh_host_rsa_key"
-    ];
-  };
-  boot.kernelPackages = pkgs.linuxPackages_6_18; #Need 6.13+ kernel for RTL8125D support
-
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # systemd-resolved
-  services.resolved = {
-    enable = true;
-    dnssec = "true";
-    domains = [ "~." ]; # "use as default interface for all requests"
-    # (see man resolved.conf)
-    # let Avahi handle mDNS publication
-    extraConfig = ''
-      DNSOverTLS=opportunistic
-      MulticastDNS=resolve
-    '';
-    llmnr = "true";
-  };
-
-  networking.nameservers = [
-    secrets.controlDns # Use the DNS server defined in secrets.nix
-  ];
-  
-  networking.firewall.allowedTCPPorts = [
-    25565 # Minecraft
-  ];
-  
-  services.gvfs.enable = true; # smb support
-  
   services.gnome.gnome-keyring.enable = true;
   
   # Set your time zone.
@@ -124,207 +35,9 @@ in {
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
-  # Hyprland stuff 
-  programs.hyprland.enable = true;
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
-  programs.waybar.enable = true;
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-hyprland
-    pkgs.xdg-desktop-portal-gtk
-  ];
-
-  systemd.user.services.waybar.unitConfig = {
-    ConditionEnvironment = "XDG_CURRENT_DESKTOP=Hyprland"; # Don't start waybar on Plasma >:(
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.chris = {
-    isNormalUser = true;
-    description = "Christopher Andrade";
-    extraGroups = [ "networkmanager" "wheel" "wireshark" ];
-    shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCg88GUiVCOaDnv2IRdcLDrnpTvpgFRi9Dzyf8l78ikoRX2vEkmT2ucUXvMhFULL9LHw1qDHgGctTCT2cr3VSJ17r/8Fbafq18Y7D6L1n9wgK4khdpkqy7BYHowbPpygroDAVGHIu5wgMaFGOHcanQntcFBqhGAhLYri0XQSO2OHlEgQFmVBS/usBAfcRMmxTzQ9QKFf/NLixymTQcXOO1grIqfBL6Y1vtXihPbU0xrmH6uNnlJqK/xVMqu3w5g09sLUZFoJjB2hQTaLyfAkiU4Co4HSktNzPqCc8a0TBxW32WjCcu6jinvPdPzBrQdR1+N4235lyA1vR27srxkd0gSgl84Dl2DXhfdbRUfg6sjQvvnNlxGHBXLZFmh8qGO8WOlppT9+3KSDYx/LVubRm8M7opyy3Q8h4YsnF/Ffb+86Nm9XLHRiF+DIF4mw/7ixSqveM4jqDSfAye0FyHumoxnHFw7hA9l+XSthNPFInDUZtQw7bRFL2JY3XO6ki5AIf0= chris@Chriss-MacBook-Pro.local"
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJd9CCADuU72Eqt2ZmOOzWbwutaJjpy9VIJ+CVI3Jtz9d41UIqXPJwEYHueEFbup8tkB7mSAmRxgFh3mr5xOwH8="
-    ];
-  };
-
-  # Home manager
-  home-manager.users.chris = {
-    home.stateVersion = "23.11";
-    programs = {
-      vim.enable = true;
-      htop.enable = true;
-      firefox = {
-        enable = true;
-        package = unstable.firefox-devedition;
-      };
-      vscode = {
-        enable = true;
-        package = unstable.vscode;
-      };
-      yt-dlp.enable = true;
-      git = {
-        enable = true;
-        settings.user = {
-          name = "Dorge47";
-          email = "Dorge47@users.noreply.github.com";
-        };
-        signing = {
-          signByDefault = true;
-          key = "71107D53545117FE";
-        };
-      };
-      chromium.enable = true;
-      fzf.enable = true;
-      kitty = {
-        enable = true;
-        settings = {
-          confirm_os_window_close = 0;
-        };
-      };
-      hyprlock = {
-        enable = true;
-        settings = hyprlockConfig;
-      };
-      waybar.enable = true;
-      rofi = {
-        enable = true;
-        theme = "android_notification";
-      };
-      yazi.enable = true; # testing before I switch hyprland to this
-      btop = {
-        enable = true;
-        package = pkgs.btop-rocm;
-      };
-      ncmpcpp.enable = true;
-    };
-    home.packages = with pkgs; [
-      wget
-      (fortune.override { withOffensive = true; })
-      neofetch
-      telegram-desktop
-      discord
-      vlc
-      obsidian
-      twitch-cli
-      steamcmd
-      gimp
-      handbrake
-      dbeaver-bin
-      prismlauncher
-      jdk
-      azahar
-      ncdu
-      zoom-us
-      kdePackages.kdenlive
-      pavucontrol
-      vdhcoapp
-      lutris
-      unstable.p7zip-rar
-      python315
-      (factorio-space-age.override { username = "dorge47"; token = secrets.factorioToken; })
-      kdePackages.kate
-      #Hyprland stuff
-      libnotify
-      mpvpaper
-      wl-clipboard
-      slurp
-      grim
-      kdePackages.dolphin
-      ulauncher
-      blueman
-      wev
-      kdePackages.qt6ct
-    ];
-    services = {
-      mako.enable = true;
-      mpd = {
-        enable = true;
-        musicDirectory = secrets.music;
-      };
-    };
-    wayland.windowManager.hyprland = {
-      enable = true;
-      settings = hyprlandConfig; # See hyprland.nix
-    };
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    gnupg
-    nodejs
-    hwinfo
-    pciutils
-    kdePackages.filelight
-    openvpn
-    kmymoney
-    obs-studio
-    cifs-utils
-    protonup-qt
-    libinput
-    mimalloc
-    coolercontrol.coolercontrol-gui
-    coolercontrol.coolercontrold
-    coolercontrol.coolercontrol-ui-data
-    lm_sensors
-    gparted
-    git-crypt
-  ];
   
-   environment.etc = {
-     # Fix stupid high-resolution scrolling on G502
-     "libinput/local-overrides.quirks".text = ''
- [Logitech G502]
- MatchName=Logitech G502
- AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
-     # https://github.com/NixOS/nixpkgs/issues/409986#issuecomment-3217982330
-     "xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
-   };
-  
-  fonts.packages = with pkgs; [
-    noto-fonts-cjk-serif
-    noto-fonts-cjk-sans
-  ] ++ builtins.filter pkgs.lib.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -345,21 +58,12 @@ in {
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
-  # Enable fish shell as default
-  programs.fish.enable = true;
-  users.defaultUserShell = pkgs.fish;
-
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0" # Required for obsidian
     "mbedtls-2.28.10" # Required for OpenRGB
   ];
 
   #Enable SSH
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-    ports = [ 2222 ];
-  };
   
   # Enable Steam
   programs.steam.enable = true;
@@ -378,21 +82,6 @@ in {
   hardware.bluetooth.powerOnBoot = true;
   
   # Wireshark
-  programs.wireshark = {
-    enable = true;
-    dumpcap.enable = true;
-    usbmon.enable = true;
-    package = pkgs.wireshark;
-  };
-  
-  services.syncthing = {
-    enable = true;
-    relay.enable = false;
-    openDefaultPorts = true;
-    user = "chris";
-    dataDir = "/home/chris";
-    configDir = "/home/chris/.config/syncthing";
-  };
   
   # GnuPG
   programs.gnupg.agent = {
@@ -401,39 +90,7 @@ in {
     enableSSHSupport = true;
   };
   
-  # Enable building from repo file
-  nix.nixPath = [
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixos-config=/home/chris/Documents/GitHub/nix-config/configuration.nix"
-    "/nix/var/nix/profiles/per-user/root/channels"
-  ];
-  
-  #Mount drives
-  fileSystems."/run/media/chris/New Volume" = #E drive
-    { device = "/dev/disk/by-uuid/01D7DC1481BB6E80";
-      fsType = "ntfs";
-    };
-    
-  fileSystems."/run/media/chris/Basic data partition" = #Windows drive
-    { device = "/dev/disk/by-uuid/01D9D96304239210";
-      fsType = "ntfs";
-    };
-  
-  fileSystems."/run/media/chris/fileserver" = #Unraid server
-    { device = secrets.unraid.path;
-      fsType = "cifs";
-      options = secrets.unraid.options;
-    };
-
-  # flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
   # Emergency update
   nix.package = nixfixPkgs.nixVersions.latest;
 
-  # Garbage collection
-  nix.settings.auto-optimise-store = true;
-  nix.gc.automatic = true;
-  nix.gc.dates = "weekly";
-  nix.gc.options = "--delete-older-than 30d";
 }

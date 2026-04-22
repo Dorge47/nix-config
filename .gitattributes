@@ -1,2 +1,1 @@
-secrets.nix filter=git-crypt diff=git-crypt
-acme-cloudflare.env filter=git-crypt diff=git-crypt
+secrets/** filter=git-crypt diff=git-crypt

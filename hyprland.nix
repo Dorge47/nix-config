@@ -1,5 +1,3 @@
-{ secrets }:
-
 {
   "$terminal" = "kitty";
   "$fileManager" = "dolphin"; # Fucked in Hyprland, switch later
