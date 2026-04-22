@@ -172,18 +172,11 @@ in {
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.chris = {
     isNormalUser = true;
     description = "Christopher Andrade";
     extraGroups = [ "networkmanager" "wheel" "wireshark" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCg88GUiVCOaDnv2IRdcLDrnpTvpgFRi9Dzyf8l78ikoRX2vEkmT2ucUXvMhFULL9LHw1qDHgGctTCT2cr3VSJ17r/8Fbafq18Y7D6L1n9wgK4khdpkqy7BYHowbPpygroDAVGHIu5wgMaFGOHcanQntcFBqhGAhLYri0XQSO2OHlEgQFmVBS/usBAfcRMmxTzQ9QKFf/NLixymTQcXOO1grIqfBL6Y1vtXihPbU0xrmH6uNnlJqK/xVMqu3w5g09sLUZFoJjB2hQTaLyfAkiU4Co4HSktNzPqCc8a0TBxW32WjCcu6jinvPdPzBrQdR1+N4235lyA1vR27srxkd0gSgl84Dl2DXhfdbRUfg6sjQvvnNlxGHBXLZFmh8qGO8WOlppT9+3KSDYx/LVubRm8M7opyy3Q8h4YsnF/Ffb+86Nm9XLHRiF+DIF4mw/7ixSqveM4jqDSfAye0FyHumoxnHFw7hA9l+XSthNPFInDUZtQw7bRFL2JY3XO6ki5AIf0= chris@Chriss-MacBook-Pro.local"
@@ -266,6 +259,7 @@ in {
       unstable.p7zip-rar
       python315
       (factorio-space-age.override { username = "dorge47"; token = secrets.factorioToken; })
+      kdePackages.kate
       #Hyprland stuff
       libnotify
       mpvpaper
@@ -275,7 +269,6 @@ in {
       kdePackages.dolphin
       ulauncher
       blueman
-      xfce.thunar # temporary while I figure out how the Christ yazi works
       wev
       kdePackages.qt6ct
     ];
@@ -318,15 +311,15 @@ in {
     git-crypt
   ];
   
-  environment.etc = {
-    # Fix stupid high-resolution scrolling on G502
-    "libinput/local-overrides.quirks".text = ''
-[Logitech G502]
-MatchName=Logitech G502
-AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
-    # https://github.com/NixOS/nixpkgs/issues/409986#issuecomment-3217982330
-    "xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
-  };
+   environment.etc = {
+     # Fix stupid high-resolution scrolling on G502
+     "libinput/local-overrides.quirks".text = ''
+ [Logitech G502]
+ MatchName=Logitech G502
+ AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
+     # https://github.com/NixOS/nixpkgs/issues/409986#issuecomment-3217982330
+     "xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+   };
   
   fonts.packages = with pkgs; [
     noto-fonts-cjk-serif
@@ -335,15 +328,8 @@ AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
