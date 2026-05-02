@@ -80,6 +80,8 @@ in {
   #Enable openrgb
   services.hardware.openrgb.enable = true;
   
+  services.openssh.ports = [ 2222 ];
+  
   # Wireshark
   programs.wireshark = {
     enable = true;

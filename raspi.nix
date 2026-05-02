@@ -19,49 +19,14 @@ in {
   #     filter = "*rpi-4-*.dtb";
   #   };
   # };
-  boot = {
-    loader = {
-      # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
-      grub.enable = false;
-      # Enables the generation of /boot/extlinux/extlinux.conf
-      generic-extlinux-compatible.enable = true;
-    };
-    kernelPackages = pkgs.linuxPackages_rpi4;
-    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
-  };
+  
 
-  networking.hostName = "nixPi"; # Define your hostname.
+   # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  # Set your time zone.
-  time.timeZone = "America/Los_Angeles";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -88,21 +53,7 @@ in {
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.dorge = {
-    isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      tree
-      kitty
-    ];
-    shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJd9CCADuU72Eqt2ZmOOzWbwutaJjpy9VIJ+CVI3Jtz9d41UIqXPJwEYHueEFbup8tkB7mSAmRxgFh3mr5xOwH8= iphone16promax"
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDBg/SsXqtyoF+Xm0b99/cwcaZR/EESwJi3rUh0VDAmVpKbt+DrGRQds2y7AcgGVZTnXIT95dD5ZKbLmx4SlY9zW7nK2kDm1KUHTefpQV6S5QYMrmrKuRaY4kbDJI5pi1l8mmiu3vIi+8aBOQsD35BF93et3Vt0km6YJuOQgdNfFLSjdESYuujJM/8CTvvfh5RL2xNKqhCxYW/ZoXXmALEsZAOvggxBb8tWSnFyLKPoaANj/9tz6umTiVdhg3nVEHGsA7DZEtEYT8+94yRgysJ1GTYvzDNu89aRWwZKGKTMZhvh+BNu6LI7F8YpfQhoP5uxgkUkZCDmEme+/BkWtrorVCJrGwBdQ6MZvW4hwSJadXUulkBmAXu0xMZcAKg7ZKEgGm00ki9f+n5660jjrq8AsREqUC9n2NUHi3sDH4s5OhSqeCoVC+R6xLFCu54Zp2Lu+PHMt8MwPINJFSleajx9jv6znebfU98UtBcMAe/drSzQrym+fLKzponJWPMGR7s= chris@nixos"
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCg88GUiVCOaDnv2IRdcLDrnpTvpgFRi9Dzyf8l78ikoRX2vEkmT2ucUXvMhFULL9LHw1qDHgGctTCT2cr3VSJ17r/8Fbafq18Y7D6L1n9wgK4khdpkqy7BYHowbPpygroDAVGHIu5wgMaFGOHcanQntcFBqhGAhLYri0XQSO2OHlEgQFmVBS/usBAfcRMmxTzQ9QKFf/NLixymTQcXOO1grIqfBL6Y1vtXihPbU0xrmH6uNnlJqK/xVMqu3w5g09sLUZFoJjB2hQTaLyfAkiU4Co4HSktNzPqCc8a0TBxW32WjCcu6jinvPdPzBrQdR1+N4235lyA1vR27srxkd0gSgl84Dl2DXhfdbRUfg6sjQvvnNlxGHBXLZFmh8qGO8WOlppT9+3KSDYx/LVubRm8M7opyy3Q8h4YsnF/Ffb+86Nm9XLHRiF+DIF4mw/7ixSqveM4jqDSfAye0FyHumoxnHFw7hA9l+XSthNPFInDUZtQw7bRFL2JY3XO6ki5AIf0= chris@Chriss-MacBook-Pro.local"
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCz2824Z6S5eFiKXtdDh1HMVSwuVmKSP01dHT/UoM7vBuuEWcZjpaMoqo/RRRyPskDI/Z5wL5k7l8gMGwP0A0gNEYxg5JvhCbe4ilur3cdXaLmrJsypIWO5EoorrpijMeIeUTKnLqr+pMckMV9sKeHlb9Pand1gaiAiy3Xc9suMyir+BdT11J1hzU8a9ZitD8U4vRtIDG9QNQJ4b0OCYqFgCJPczpgAtCBME++4jl2WakKRKlKbHSLxKhB7j6tT3VSltBPpmMt14seA+iPafA4YAPu1GasVY6FExFI7AtGtZxjHzkCjte6AgeKNUICd5ZLDwGax7Sz2vnsv+VPvhkxWP4vpEi6Umic1Gbce0LsWkIMF4aC0nhwd9Cf/HMO6r1SIGPlrAM8w+2fUA8ja8v5eAQ3rl/oqJbWrITM9RvNuUC97pDJhRgM9FVF7OIrXO2gVUpI4w2q3H8wBcgtCcb+KWlQjy8DGJuaQ7Fxrlgb9QQM5/CpRCE9DNVrtsqW998E= nu@raspberrypi"
-    ];
-  };
+  
 
   programs.git.enable = true;
   programs.htop.enable = true;

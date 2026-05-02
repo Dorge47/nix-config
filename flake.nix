@@ -28,7 +28,7 @@
     };
     nixosConfigurations.raspi = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs secrets; };
       modules = [
         ./hosts/raspi/default.nix
       ];
