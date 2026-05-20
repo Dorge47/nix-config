@@ -107,6 +107,13 @@ in {
     "xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
   };
   
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0" # Required for Obsidian
+    "mbedtls-2.28.10" # Required for OpenRGB
+  ];
+  
+  nix.gc.options = "--delete-older-than 30d";
+  
   # Emergency update
   nix.package = nixfixPkgs.nixVersions.latest;
 }

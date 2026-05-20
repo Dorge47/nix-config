@@ -11,8 +11,8 @@
     };
   
   fileSystems."/run/media/chris/fileserver" = #Unraid server
-    { device = secrets.unraid.path;
+    { device = secrets.unraidPath;
       fsType = "cifs";
-      options = secrets.unraid.options;
+      options = [ "credentials=/home/dorge/Documents/GitHub/nix-config/secrets/desktop-credentials.txt" ];
     };
 }
