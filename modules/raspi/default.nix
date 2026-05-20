@@ -52,6 +52,7 @@
     raspberrypi-eeprom
     cifs-utils
     btop
+    git-crypt
   ];
   
   system.stateVersion = "25.05"; # damn is that a yellow-rumped warbler
