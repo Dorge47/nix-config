@@ -13,6 +13,6 @@
   fileSystems."/run/media/chris/fileserver" = #Unraid server
     { device = secrets.unraidPath;
       fsType = "cifs";
-      options = [ "credentials=/home/dorge/Documents/GitHub/nix-config/secrets/desktop-credentials.txt" ];
+      options = [ "credentials=/home/chris/Documents/GitHub/nix-config/secrets/desktop-credentials.txt" ];
     };
 }
