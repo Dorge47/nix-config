@@ -10,6 +10,7 @@
     ./../../modules/raspi/default.nix
     ./../../modules/services/openssh.nix
     ./../../modules/services/printing.nix
+    ./../../modules/users/dorge.nix
   ];
   
   networking.hostName = "nixPi";

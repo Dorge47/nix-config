@@ -35,6 +35,11 @@
     variant = "";
   };
   
+  console = {
+    font = "ter-v32n";
+    packages = with pkgs; [ terminus_font ];
+  };
+  
   programs.git.enable = true;
   programs.htop.enable = true;
   programs.fish.enable = true;
