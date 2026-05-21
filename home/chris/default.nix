@@ -3,10 +3,6 @@ let unstable = import inputs.nixpkgs-unstable {
   system = pkgs.system;
   config = { allowUnfree = true; };
 };
-lutrisfixPkgs = import inputs.nixpkgs-lutrisfix {
-  system = pkgs.system;
-  config = { allowUnfree = true; };
-};
 in {
   imports = [
     ./hyprland/default.nix
@@ -58,7 +54,7 @@ in {
     kdePackages.kdenlive
     pavucontrol
     vdhcoapp
-    lutrisfixPkgs.lutris
+    lutris
     unstable.p7zip-rar
     python315
     (factorio-space-age.override { username = "dorge47"; token = secrets.factorioToken; })

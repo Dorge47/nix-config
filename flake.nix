@@ -7,10 +7,9 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs-nixfix.url = "github:NixOS/nixpkgs/86a3458";
-    nixpkgs-lutrisfix.url = "github:NixOS/nixpkgs/0c88e1f";
   };
   
-  outputs = inputs@{ nixpkgs, home-manager, nixpkgs-nixfix, nixpkgs-lutrisfix, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, nixpkgs-nixfix, ... }:
   let secrets = import ./secrets/secrets.nix;
   in {
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
