@@ -53,6 +53,7 @@
     cifs-utils
     btop
     git-crypt
+    yt-dlp
   ];
   
   system.stateVersion = "25.05"; # damn is that a yellow-rumped warbler
