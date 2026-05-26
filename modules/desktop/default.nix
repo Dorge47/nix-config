@@ -97,7 +97,7 @@ in {
     enableSSHSupport = true;
   };
   
-   environment.etc = {
+  environment.etc = {
     # Fix stupid high-resolution scrolling on G502
     "libinput/local-overrides.quirks".text = ''
  [Logitech G502]
@@ -114,6 +114,6 @@ in {
   
   nix.gc.options = "--delete-older-than 30d";
   
-  # Emergency update
-  nix.package = nixfixPkgs.nixVersions.latest;
+  # Staying on 2.34 until stable branch has >= 2.34
+  nix.package = nixfixPkgs.nixVersions.nix_2_34;
 }

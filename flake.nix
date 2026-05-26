@@ -9,7 +9,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
-    nixpkgs-nixfix.url = "github:NixOS/nixpkgs/86a3458";
+    nixpkgs-nixfix.url = "github:NixOS/nixpkgs/master";
   };
   
   outputs = inputs@{ nixpkgs, nix-darwin, home-manager, nixpkgs-nixfix, ... }:
