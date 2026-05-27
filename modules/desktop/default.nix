@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }:
 let nixfixPkgs = import inputs.nixpkgs-nixfix {
-  system = pkgs.system;
+  system = pkgs.stdenv.hostPlatform.system;
 };
 in {
   imports = [
