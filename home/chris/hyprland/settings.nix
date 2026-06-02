@@ -160,7 +160,7 @@
       "$mainMod SHIFT, S, movetoworkspace, special:magic"
       "$mainMod, mouse_down, workspace, e+1"
       "$mainMod, mouse_up, workspace, e-1"
-      ", Print, exec, grim -g \"$(slurp -w 0)\" - | wl-copy"
+      ", Print, exec, hyprshot -zm region --clipboard-only"
       "SHIFT, Print, exec, grim - | wl-copy"
       "$mainMod, 1, exec, firefox-devedition"
       "$mainMod, 2, exec, firefox-devedition"

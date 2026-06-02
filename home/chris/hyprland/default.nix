@@ -11,6 +11,7 @@
     blueman
     wev
     kdePackages.qt6ct
+    hyprshot
   ];
   services.mako.enable = true;
   wayland.windowManager.hyprland.enable = true;
