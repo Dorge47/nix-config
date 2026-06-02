@@ -36,7 +36,7 @@ in {
   home.packages = with pkgs; [
     wget
     (fortune.override { withOffensive = true; })
-    neofetch
+    fastfetch
     telegram-desktop
     discord
     vlc
@@ -53,7 +53,6 @@ in {
     zoom-us
     kdePackages.kdenlive
     pavucontrol
-    vdhcoapp
     lutris
     unstable.p7zip-rar
     python315

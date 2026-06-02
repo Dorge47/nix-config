@@ -113,7 +113,4 @@ in {
   ];
   
   nix.gc.options = "--delete-older-than 30d";
-  
-  # Staying on 2.34 until stable branch has >= 2.34
-  nix.package = nixfixPkgs.nixVersions.nix_2_34;
 }

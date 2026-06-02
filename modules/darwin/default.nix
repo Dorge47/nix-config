@@ -15,7 +15,7 @@
     git-crypt
     gnupg
     htop
-    neofetch
+    fastfetch
     p7zip
     pinentry_mac
     python313

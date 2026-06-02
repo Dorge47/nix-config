@@ -28,5 +28,4 @@
       "/etc/secrets/initrd/ssh_host_rsa_key"
     ];
   };
-  boot.kernelPackages = pkgs.linuxPackages_6_18; #Need 6.13+ kernel for RTL8125D support
 }
