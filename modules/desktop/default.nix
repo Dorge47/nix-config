@@ -40,7 +40,12 @@ in {
   };
   
   # Enable fish shell as default
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+    set -g fish_greeting
+    fortune -s'';
+  };
   users.defaultUserShell = pkgs.fish;
   
   # List packages installed in system profile. To search, run:
