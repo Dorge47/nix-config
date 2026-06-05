@@ -10,6 +10,7 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     nixpkgs-nixfix.url = "github:NixOS/nixpkgs/master";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
   
   outputs = inputs@{ nixpkgs, nix-darwin, home-manager, nixpkgs-nixfix, ... }:
@@ -33,6 +34,7 @@
       system = "aarch64-linux";
       specialArgs = { inherit inputs secrets; };
       modules = [
+        inputs.nixos-hardware.nixosModules.raspberry-pi-4
         ./hosts/raspi/default.nix
       ];
     };
