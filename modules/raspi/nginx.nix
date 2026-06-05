@@ -3,7 +3,7 @@
   services.nginx = {
     enable = true;
     virtualHosts = {
-      "${secrets.acmeStuff.mainDomain}" = {
+      "${secrets.acmeStuff.mainDomain}" = { # Webserver
         forceSSL = true;
         useACMEHost = "${secrets.acmeStuff.mainDomain}";
         serverAliases = secrets.nginxStuff.aliases;
@@ -77,6 +77,14 @@
         useACMEHost = "${secrets.acmeStuff.mainDomain}";
         locations."/" = {
           extraConfig = secrets.nginxStuff.plexConfig;
+        };
+      };
+      
+      "${secrets.nginxStuff.jellyfinDomain}" = {
+        forceSSL = true;
+        useACMEHost = "${secrets.acmeStuff.mainDomain}";
+        locations."/" = {
+          extraConfig = secrets.nginxStuff.jellyfinConfig;
         };
       };
     };
