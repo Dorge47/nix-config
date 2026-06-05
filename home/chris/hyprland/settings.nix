@@ -170,6 +170,8 @@
         "$mainMod, 6, exec, code"
         ", XF86Tools, exec, ${secrets.lightsCurl}"
         ", XF86Launch5, exec, ${secrets.tvCurl}"
+        ", XF86Launch6, exec, openrgb -p Dark"
+        ", XF86Launch7, exec, openrgb -p Dokibird"
         "$mainMod, A, exec, pavucontrol"
       ];
     

@@ -59,6 +59,7 @@ in {
     (factorio-space-age.override { username = "dorge47"; token = secrets.factorioToken; })
     kdePackages.kate
     dolphin-emu
+    melonds
   ];
   services = {
     mpd = {
