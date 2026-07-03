@@ -55,11 +55,15 @@ in {
     pavucontrol
     lutris
     unstable.p7zip-rar
-    python315
+    (python314.withPackages (ps: with ps; [ # Need PIL for minegrub
+      pillow#dear
+    ]))
     (factorio-space-age.override { username = "dorge47"; token = secrets.factorioToken; })
     kdePackages.kate
     dolphin-emu
     melonds
+    proton-authenticator
+    qdirstat
     restic
   ];
   services = {

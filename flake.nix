@@ -9,11 +9,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
-    nixpkgs-nixfix.url = "github:NixOS/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
   
-  outputs = inputs@{ nixpkgs, nix-darwin, home-manager, nixpkgs-nixfix, ... }:
+  outputs = inputs@{ nixpkgs, nix-darwin, home-manager, ... }:
   let secrets = import ./secrets/secrets.nix;
   in {
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {

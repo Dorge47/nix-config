@@ -1,8 +1,5 @@
 { pkgs, inputs, ... }:
-let nixfixPkgs = import inputs.nixpkgs-nixfix {
-  system = pkgs.stdenv.hostPlatform.system;
-};
-in {
+{
   imports = [
     ./plasma.nix
     ./hyprland.nix
@@ -107,9 +104,9 @@ in {
   environment.etc = {
     # Fix stupid high-resolution scrolling on G502
     "libinput/local-overrides.quirks".text = ''
- [Logitech G502]
- MatchName=Logitech G502
- AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
+    [Logitech G502]
+    MatchName=Logitech G502
+    AttrEventCode=-REL_WHEEL_HI_RES;-REL_HWHEEL_HI_RES;'';
     # https://github.com/NixOS/nixpkgs/issues/409986#issuecomment-3217982330
     "xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
   };
