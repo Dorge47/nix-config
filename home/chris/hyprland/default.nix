@@ -12,6 +12,7 @@
     wev
     kdePackages.qt6ct
     hyprshot
+    hyprpolkitagent
   ];
   services.mako.enable = true;
   wayland.windowManager.hyprland.enable = true;

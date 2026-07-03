@@ -102,6 +102,8 @@ in {
     enableSSHSupport = true;
   };
   
+  security.polkit.enable = true;
+  
   environment.etc = {
     # Fix stupid high-resolution scrolling on G502
     "libinput/local-overrides.quirks".text = ''

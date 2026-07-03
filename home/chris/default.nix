@@ -60,6 +60,7 @@ in {
     kdePackages.kate
     dolphin-emu
     melonds
+    restic
   ];
   services = {
     mpd = {

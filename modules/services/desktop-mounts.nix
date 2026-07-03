@@ -6,7 +6,7 @@
     };
     
   fileSystems."/run/media/chris/Basic data partition" = #Windows drive
-    { device = "/dev/disk/by-uuid/01D9D96304239210";
+    { device = "/dev/disk/by-uuid/01DD084173E3D370";
       fsType = "ntfs";
     };
   
@@ -15,4 +15,10 @@
       fsType = "cifs";
       options = [ "credentials=/home/chris/Documents/GitHub/nix-config/secrets/desktop-credentials.txt" ];
     };
+  
+  fileSystems."/".options = [ "compress=zstd:1" "noatime" ];
+  fileSystems."/home".options = [ "compress=zstd:1" "noatime" ];
+  fileSystems."/nix".options = [ "compress=zstd:1" "noatime" ];
+  fileSystems."/var/log".options = [ "compress=zstd:1" "noatime" ];
+  fileSystems."/.snapshots".options = [ "compress=zstd:1" "noatime" ];
 }
