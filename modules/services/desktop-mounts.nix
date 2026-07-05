@@ -3,11 +3,13 @@
   fileSystems."/run/media/chris/New Volume" = #E drive
     { device = "/dev/disk/by-uuid/01D7DC1481BB6E80";
       fsType = "ntfs";
+      options = [ "nofail" ];
     };
     
   fileSystems."/run/media/chris/Basic data partition" = #Windows drive
     { device = "/dev/disk/by-uuid/01DD084173E3D370";
       fsType = "ntfs";
+      options = [ "nofail" ];
     };
   
   fileSystems."/run/media/chris/fileserver" = #Unraid server
