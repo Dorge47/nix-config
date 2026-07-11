@@ -2,19 +2,9 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/nix/default.nix
-    ./../../modules/boot/desktop-boot.nix
-    ./../../modules/boot/grub.nix
-    ./../../modules/networking/default.nix
-    ./../../modules/networking/desktop-networking.nix
-    ./../../modules/desktop/default.nix
-    ./../../modules/services/openssh.nix
-    ./../../modules/services/syncthing.nix
-    ./../../modules/services/desktop-mounts.nix
-    ./../../modules/services/printing.nix
-    ./../../modules/hardware/bluetooth.nix
-    ./../../modules/users/chris.nix
+    ./../../profiles/desktop
   ];
   
   networking.hostName = "nixos";
+  system.stateVersion = "23.11"; # What sound does a tapir make again? Uuuuuuuuuu.
 }

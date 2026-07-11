@@ -7,7 +7,7 @@
       domain = secrets.acmeStuff.mainDomain;
       extraDomainNames = secrets.domainNames;
       dnsProvider = "cloudflare";
-      environmentFile = ./../../secrets/acme-cloudflare.env;
+      environmentFile = "/home/dorge/Documents/GitHub/nix-config/secrets/acme-cloudflare.env";
       group = "nginx";
     };
   };

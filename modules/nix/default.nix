@@ -2,6 +2,7 @@
 {
   imports = [
     ./settings.nix
+    ./insecure-packages.nix
   ];
 
   nix.nixPath = [

@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./hyprlock.nix
+    ./settings.nix
+  ];
   home.packages = with pkgs; [
     libnotify
     mpvpaper

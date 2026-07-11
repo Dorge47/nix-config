@@ -9,4 +9,6 @@
 #  ];
   
   services.gvfs.enable = true; # smb support
+  
+  services.openssh.ports = [ 2222 ];
 }
