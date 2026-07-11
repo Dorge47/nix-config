@@ -32,6 +32,7 @@ in {
       package = pkgs.btop-rocm;
     };
     ncmpcpp.enable = true;
+    tmux.enable = true;
   };
   home.packages = with pkgs; [
     wget
@@ -65,6 +66,7 @@ in {
     proton-authenticator
     qdirstat
     restic
+    libreoffice
   ];
   services = {
     mpd = {
