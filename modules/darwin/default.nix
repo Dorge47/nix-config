@@ -7,6 +7,7 @@
   ];
   environment.systemPackages = with pkgs; [
     btop
+    codex
     cowsay
     elinks
     ffmpeg
@@ -45,6 +46,12 @@
   system.stateVersion = 6;
   
   system.defaults = {
+    CustomUserPreferences = {
+      "com.apple.desktopservices" = {
+        DSDontWriteNetworkStores = true;
+        DSDontWriteUSBStores = true;
+      };
+    };
     dock = {
       autohide = true;
       show-recents = false;
