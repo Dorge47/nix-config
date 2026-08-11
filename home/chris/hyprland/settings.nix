@@ -29,6 +29,7 @@
         "HYPRCURSOR_SIZE,24"
         "QT_QPA_PLATFORMTHEME,qt6ct"
         "QT_QPA_PLATFORM,wayland;xcb"
+        "TZDIR,/etc/zoneinfo"
       ];
       
       general = {

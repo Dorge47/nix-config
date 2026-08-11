@@ -1,7 +1,7 @@
 { ... }:
 {
   time.timeZone = "America/Los_Angeles";
-  time.hardwareClockInLocalTime = true;
+  time.hardwareClockInLocalTime = false;
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {

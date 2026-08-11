@@ -6,5 +6,5 @@
   ];
   
   networking.hostName = "nixos-prodesk";
-  system.stateVersion = "26.05"; #やラララ
+  system.stateVersion = "26.05"; #ヤラララ
 }

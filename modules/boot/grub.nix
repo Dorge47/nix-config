@@ -11,8 +11,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "Dorge47";
         repo = "minegrub-theme";
-        rev = "master";
-        hash = "sha256-6cFT+gGHQ2wpFEQlVAtgXrLkUz55+yt91Duedxjeh5Y=";
+        rev = "3cb79f6fd80ce07091e7457ce258d72f13b5f5b2";
+        hash = "sha256-SYBPlfNARYYT4e/g/AxzOGy7z7zVINrfmz1ov+huQgU=";
       };
       installPhase = ''
       mkdir -p $out

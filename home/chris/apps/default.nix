@@ -26,6 +26,10 @@ in {
     };
     ncmpcpp.enable = true;
     tmux.enable = true;
+    codex = {
+      enable = true;
+      package = unstable.codex;
+    };
   };
   home.packages = with pkgs; [
     wget
@@ -60,6 +64,8 @@ in {
     qdirstat
     restic
     libreoffice
+    rclone
+    ncdu
   ];
   services = {
     mpd = {
