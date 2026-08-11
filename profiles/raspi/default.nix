@@ -32,7 +32,10 @@
     packages = with pkgs; [ terminus_font ];
   };
   
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    config.credential.helper = "store";
+  };
   programs.htop.enable = true;
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
@@ -46,6 +49,10 @@
     btop
     git-crypt
     yt-dlp
+    ncdu
+    restic
+    rclone
+    (fortune.override { withOffensive = true; })
   ];
   
   nix.gc.options = "--delete-older-than 180d";

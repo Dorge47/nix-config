@@ -7,7 +7,7 @@
   ];
   
   networking.hostName = "nixPi";
-  system.stateVersion = "25.05"; # damn is that a yellow-rumped warbler
+  system.stateVersion = "26.05"; # Can't you see the stone right at your feet?
   
   # hardware = {
   #   raspberri-pi."4".apply-overlays-dtmerge.enable = true;
