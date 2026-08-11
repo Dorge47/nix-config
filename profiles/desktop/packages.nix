@@ -1,5 +1,9 @@
-{ pkgs, ... }:
-{
+{ pkgs, inputs, ... }:
+let unstable = import inputs.nixpkgs-unstable {
+  system = pkgs.stdenv.hostPlatform.system;
+  config = { allowUnfree = true; };
+};
+in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -12,7 +16,7 @@
     kmymoney
     obs-studio
     cifs-utils
-    protonup-qt
+    unstable.protonup-qt
     libinput
     mimalloc
     coolercontrol.coolercontrol-gui
