@@ -10,7 +10,7 @@
       signByDefault = true;
       key = "71107D53545117FE";
     };
-    extraConfig = {
+    settings = {
       credential.helper = "store";
     };
   };
