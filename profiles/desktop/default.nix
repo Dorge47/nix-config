@@ -1,4 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
+let
+  picotoolUdevRules = pkgs.runCommand "picotool-udev-rules" { } ''
+    mkdir -p $out/lib/udev/rules.d
+    cp ${./../../60-picotool.rules} \
+      $out/lib/udev/rules.d/60-picotool.rules
+  '';
+in
 {
   imports = [
     ./gaming.nix
@@ -23,4 +30,14 @@
   ];
   
   nix.gc.options = "--delete-older-than 30d";
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      libusb1
+      stdenv.cc.cc.lib
+    ];
+  };
+  services.udev.packages = [
+    picotoolUdevRules
+  ];
 }
