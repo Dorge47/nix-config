@@ -17,10 +17,13 @@
     gnupg
     htop
     fastfetch
+    ncdu
     p7zip
     pinentry_mac
     python313
+    rclone
     restic
+    tmux
     tree
     twitch-cli
   ];
