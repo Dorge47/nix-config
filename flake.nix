@@ -43,6 +43,20 @@
         }
       ];
     };
+    nixosConfigurations.parallels = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      specialArgs = { inherit inputs secrets; };
+      modules = [
+        ./hosts/parallels/default.nix
+        home-manager.nixosModules.default
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.extraSpecialArgs = {
+            inherit inputs secrets;
+          };
+        }
+      ];
+    };
     nixosConfigurations.raspi = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       specialArgs = { inherit inputs secrets; };
