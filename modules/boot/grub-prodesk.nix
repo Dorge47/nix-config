@@ -5,6 +5,8 @@
     efiSupport = true;
     useOSProber = true;
     device = "nodev";
+    default = "saved";
+    extraEntries = "GRUB_SAVEDEFAULT=true";
     theme = pkgs.stdenv.mkDerivation {
       pname = "minegrub-theme";
       version = "master";
