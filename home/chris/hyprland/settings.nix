@@ -169,6 +169,7 @@
         "$mainMod, 2, exec, firefox-devedition"
         "$mainMod, F, FULLSCREEN"
         "$mainMod, L, exec, hyprlock"
+        "$mainMod, 5, exec, obsidian"
         "$mainMod, 6, exec, code"
         ", XF86Tools, exec, ${secrets.lightsCurl}"
         ", XF86Launch5, exec, ${secrets.tvCurl}"

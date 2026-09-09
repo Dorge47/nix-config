@@ -26,6 +26,7 @@
     ./../../modules/networking/desktop-networking.nix
     ./../../modules/services/openssh.nix
     ./../../modules/services/printing.nix
+    ./../../modules/services/qwen.nix
     ./../../modules/users/chris.nix
   ];
   
