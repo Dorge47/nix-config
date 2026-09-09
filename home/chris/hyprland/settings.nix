@@ -163,7 +163,7 @@
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-        ", Print, exec, hyprshot -zm region --clipboard-only"
+        ", Print, exec, flameshot screen --number $(hyprctl -j monitors | jq -r '.[] | select(.focused) | .id') --edit"
         "SHIFT, Print, exec, grim - | wl-copy"
         "$mainMod, 1, exec, firefox-devedition"
         "$mainMod, 2, exec, firefox-devedition"
@@ -202,6 +202,40 @@
       windowrule = [
         "suppress_event maximize, match:class .*"
         "no_focus on, match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false"
+        {
+          name = "flameshot-general";
+          "match:initial_title" = "^flameshot(-pin)?$";
+          
+          no_anim = true;
+          pin = true;
+          float = true;
+          decorate = false;
+          no_blur = true;
+          no_shadow = true;
+        }
+        {
+          name = "flameshot-main";
+          "match:initial_title" = "^flameshot$";
+          
+          float = true;
+          pin = true;
+          
+          size = "(monitor_w) (monitor_h)";
+          move = "0 0";
+          
+          no_anim = true;
+          decorate = false;
+          no_blur = true;
+          no_shadow = true;
+          
+          suppress_event = "fullscreen";
+        }
+        {
+          name = "flameshot-pin";
+          "match:initial_title" = "^flameshot-pin$";
+          
+          move = "(cursor_x-(window_w*0.5)) (cursor_y-(window_h*0.5))";
+        }
       ];
       
       device = {
