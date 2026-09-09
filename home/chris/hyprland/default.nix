@@ -6,7 +6,6 @@
   ];
   home.packages = with pkgs; [
     libnotify
-    mpvpaper
     wl-clipboard
     slurp
     grim
@@ -15,9 +14,14 @@
     blueman
     wev
     kdePackages.qt6ct
-    hyprshot
-    hyprpolkitagent
   ];
-  services.mako.enable = true;
+  programs = {
+    mpvpaper.enable = true;
+    hyprshot.enable = true;
+  };
+  services = {
+    mako.enable = true;
+    hyprpolkitagent.enable = true;
+  };
   wayland.windowManager.hyprland.enable = true;
 }
