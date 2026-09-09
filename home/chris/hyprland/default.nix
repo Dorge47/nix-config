@@ -50,5 +50,8 @@ in {
       package = flameshotWithoutQt6ct;
     };
   };
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    portalPackage = null;
+  };
 }
