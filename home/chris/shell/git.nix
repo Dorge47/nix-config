@@ -12,6 +12,9 @@
     };
     settings = {
       credential.helper = "store";
+      pull = {
+        rebase = true;
+      };
     };
   };
 }
