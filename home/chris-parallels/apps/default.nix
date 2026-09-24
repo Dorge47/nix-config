@@ -33,7 +33,6 @@ in {
       pillow
     ]))
     kdePackages.kate
-    proton-authenticator
     restic
     rclone
   ];

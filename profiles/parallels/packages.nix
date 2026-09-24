@@ -11,7 +11,6 @@ in {
     openvpn
     obs-studio
     cifs-utils
-    unstable.protonup-qt
     libinput
     gparted
     git-crypt
