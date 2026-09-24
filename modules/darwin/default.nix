@@ -1,30 +1,19 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 {
   imports = [
     ./nix.nix
     ./openssh.nix
     ./../../modules/users/chris-darwin.nix
+    ./../../modules/services/qwen-darwin.nix
   ];
   environment.systemPackages = with pkgs; [
-    btop
-    cowsay
-    elinks
     ffmpeg
     fish
-    (fortune.override { withOffensive = true; })
     git-crypt
     gnupg
-    htop
-    fastfetch
-    ncdu
     p7zip
     pinentry_mac
     python313
-    rclone
-    restic
-    tmux
-    tree
-    twitch-cli
   ];
   
   environment.shells = [
@@ -43,7 +32,12 @@
   
   programs.gnupg.agent.enable = true;
   
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs = {
+    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "open-webui"
+    ];
+    hostPlatform = "aarch64-darwin";
+  };
   
   system.stateVersion = 6;
   

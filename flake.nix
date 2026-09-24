@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    nixpkgs-unstable-darwin.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
@@ -70,6 +71,13 @@
       specialArgs = { inherit inputs secrets; };
       modules = [
         ./hosts/darwin/default.nix
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.extraSpecialArgs = {
+            inherit inputs secrets;
+          };
+        }
       ];
     };
   };
