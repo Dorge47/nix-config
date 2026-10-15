@@ -66,6 +66,7 @@ in {
     libreoffice
     rclone
     ncdu
+    wowup-cf
   ];
   services = {
     mpd = {
