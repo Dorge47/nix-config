@@ -4,7 +4,7 @@
     ./nix.nix
     ./openssh.nix
     ./../../modules/users/chris-darwin.nix
-    ./../../modules/services/qwen-darwin.nix
+    # ./../../modules/services/qwen-darwin.nix
   ];
   environment.systemPackages = with pkgs; [
     ffmpeg

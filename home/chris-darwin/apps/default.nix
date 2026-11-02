@@ -14,6 +14,7 @@ in {
     cowsay
     fastfetch
     (fortune.override { withOffensive = true; })
+    lima
     ncdu
     rclone
     unstable.restic # Need 0.19 for --exclude-cloud-files flag 🙄
