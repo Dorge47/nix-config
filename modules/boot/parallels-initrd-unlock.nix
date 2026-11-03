@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = false;
   boot.initrd.kernelModules = [
     "usbhid"
     "r8152"
