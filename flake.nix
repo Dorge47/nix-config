@@ -64,6 +64,20 @@
       modules = [
         inputs.nixos-hardware.nixosModules.raspberry-pi-4
         ./hosts/raspi/default.nix
+        ({ config, pkgs, ... }: {
+          boot.kernelPackages = pkgs.linuxPackagesFor (
+            pkgs.callPackage
+              "${inputs.nixos-hardware}/raspberry-pi/common/kernel.nix"
+              {
+                rpiVersion = 4;
+                argsOverride.kernelPatches = [
+                  # https://github.com/NixOS/nixos-hardware/blob/04c6b94fa104bc23650983a4513aea196794d321/raspberry-pi/common/kernel.nix#L48
+                  pkgs.kernelPatches.bridge_stp_helper
+                  pkgs.kernelPatches.request_key_helper
+                ] ++ config.boot.kernelPatches;
+              }
+          );
+        })
       ];
     };
     darwinConfigurations.macbook = nix-darwin.lib.darwinSystem {
