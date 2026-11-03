@@ -72,14 +72,6 @@
         };
       };
       
-      "${secrets.nginxStuff.plexDomain}" = {
-        forceSSL = true;
-        useACMEHost = "${secrets.acmeStuff.mainDomain}";
-        locations."/" = {
-          extraConfig = secrets.nginxStuff.plexConfig;
-        };
-      };
-      
       "${secrets.nginxStuff.jellyfinDomain}" = {
         forceSSL = true;
         useACMEHost = "${secrets.acmeStuff.mainDomain}";
