@@ -2,6 +2,7 @@
 {
   imports = [
     ./acme.nix
+    ./mariadb.nix
     ./mounts.nix
     ./nginx.nix
     ./../../modules/nix/default.nix
@@ -36,6 +37,7 @@
     enable = true;
     config.credential.helper = "store";
   };
+  programs.tmux.enable = true;
   programs.htop.enable = true;
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
