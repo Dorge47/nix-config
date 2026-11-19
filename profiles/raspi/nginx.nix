@@ -1,7 +1,11 @@
-{ pkgs, secrets, ... }:
-{
+{ pkgs, inputs, secrets, ... }:
+let unstable = import inputs.nixpkgs-unstable {
+  system = pkgs.stdenv.hostPlatform.system;
+};
+in {
   services.nginx = {
     enable = true;
+    package = unstable.nginxMainline;
     virtualHosts = {
       "${secrets.acmeStuff.mainDomain}" = { # Webserver
         forceSSL = true;
